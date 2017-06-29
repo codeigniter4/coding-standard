@@ -92,6 +92,30 @@ class ValidMethodNameSniff extends AbstractScopeSniff
     protected function processTokenOutsideScope(File $phpcsFile, $stackPtr)
     {
 
+        $functionName = $phpcsFile->getDeclarationName($stackPtr);
+        if ($functionName === null) {
+            return;
+        }
+
+        if (0 !== strcmp($functionName, strtolower($functionName))) {
+            $errorData = array($functionName);
+
+            $error = 'Function "%s" must be snake_case.';
+            $phpcsFile->addError($error, $stackPtr, 'FunctionNotSnakeCase', $errorData);
+            return;
+        }
+
+        $warningLimit = 50;
+        if (strlen($functionName) > $warningLimit) {
+            $errorData = array(
+                          $functionName,
+                          $warningLimit,
+                         );
+
+            $warning = 'Function "%s" is over "%s" chars';
+            $phpcsFile->addWarning($warning, $stackPtr, 'MethodNameIsLong', $errorData);
+        }
+
     }//end processTokenOutsideScope()
 
 
@@ -142,7 +166,7 @@ class ValidMethodNameSniff extends AbstractScopeSniff
             && in_array($methodName, $this->allowedPublicMethodNames) === false
         ) {
             $errorData = array($methodName);
-            $error     = 'Method "%s" is not lowerCamelCase';
+            $error     = 'Method "%s" must be lowerCamelCase';
             $phpcsFile->addError($error, $stackPtr, 'MethodNotCamelCase', $errorData);
         }
 
@@ -164,7 +188,7 @@ class ValidMethodNameSniff extends AbstractScopeSniff
         // If it's a public method, it must not be prefixed with an underscore.
         if ($scope === 'public' && strrpos($methodName, '_') === 0) {
             if (in_array($methodName, $this->allowedPublicMethodNames) === false) {
-                $error = ucfirst($scope).' method "%s::%s" must be not prefixed with an underscore';
+                $error = ucfirst($scope).' method "%s::%s" must not be prefixed with an underscore';
                 $phpcsFile->addError($error, $stackPtr, 'PublicMethodMustNotHaveUnderscore', $errorData);
                 return;
             }
