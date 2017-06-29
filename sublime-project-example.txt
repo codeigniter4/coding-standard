@@ -7,7 +7,8 @@
 			{
 				"@disable": false,
 				"cmd": "/Path/To/php_codesniffer/bin/phpcs",
-				"standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/phpcs.xml"
+				// OR  if installed globally. "cmd": "phpcs",
+				"standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml"
 			}
 		}
 	},
@@ -25,19 +26,21 @@
 			[
 				"php"
 			],
-			"phpcbf_executable_path": "/Path/To/php_codesniffer/bin/phpcbf",
-			"phpcbf_additional_args":
-			{
-				"--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/phpcs.xml",
-				"-n": ""
-			},
 			"phpcs_executable_path": "/Path/To/php_codesniffer/bin/phpcs",
+			// OR  if installed globally. "phpcbf_executable_path": "phpcs",
 			"phpcs_additional_args":
 			{
-				"--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/phpcs.xml",
+				"--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
 				"-n": ""
 			},
-			"show_debug": true
+			"phpcbf_executable_path": "/Path/To/php_codesniffer/bin/phpcbf",
+			// OR  if installed globally. "phpcbf_executable_path": "phpcbf",
+			"phpcbf_additional_args":
+			{
+				"--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
+				"-n": ""
+			},
+			"show_debug": false
 		}
 	}
 }
