@@ -2,8 +2,8 @@
 
 CodeIgniter 4 Standard for [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
  
-##Install
-###Composer install (coming soon).
+## Install
+### Composer install (coming soon).
 
 `cd /Path/To/MyProject`  
 
@@ -13,7 +13,7 @@ Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin c
 
 `/Path/To/MyProject/vendor/louisl/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml`
 
-###Download install
+### Download install
 
 Download CodeIgniter4-Standard.
 
@@ -21,9 +21,9 @@ Set `standard ` paths to your local filesystem:
 
 `'/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
-###Command line use
+### Command line use
 
-####Sniffing errors & warnings (reporting).
+#### Sniffing errors & warnings (reporting).
 
 Single file.
 `phpcs /Path/To/MyFile.php --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
@@ -31,7 +31,7 @@ Single file.
 Directory (recursion).
 `phpcs /Path/To/MyProject --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
-####Fixing fixable errors.
+#### Fixing fixable errors.
 
 Single file.
 `phpcbf /Path/To/MyFile.php --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
@@ -39,9 +39,9 @@ Single file.
 Directory (recursion).
 `phpcbf /Path/To/MyProject --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
-##Example editor configs
+## Example editor configs
 
-###SublimeText project config.
+### SublimeText project config.
 Project > Edit Project
 
 Set it to your preference.
@@ -102,5 +102,5 @@ Set it to your preference.
 }
 ```
 
-##Credits
+## Credits
 Thanks to Greg Sherwood, Marc McIntyre, Andy Grunwald, Thomas Ernest and Erik Torsner, for providing open source code which helped me build this standard and a big thanks to [Squiz Labs](http://www.squizlabs.com) for creating [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer).
