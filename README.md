@@ -18,7 +18,7 @@ Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin c
 
 ### Download install
 
-Download CodeIgniter4-Standard.
+Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/master.zip).
 
 Set `standard ` paths to your local filesystem:
 
