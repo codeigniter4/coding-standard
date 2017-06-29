@@ -1,6 +1,8 @@
 # CodeIgniter4-Standard
 
 CodeIgniter 4 Standard for [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
+
+This is currently a work in progress.
  
 ## Install
 ### Composer install (coming soon).
