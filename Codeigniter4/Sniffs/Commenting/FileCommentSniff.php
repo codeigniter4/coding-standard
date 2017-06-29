@@ -104,22 +104,11 @@ class FileCommentSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        // Allow CodeIgniter first line which is usually:-
-        // <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-        // on the first line.
-        // Move to line 2.
-        $startLine = $tokens[$stackPtr]['line'];
-        $lastToken = $stackPtr;
-        while ($tokens[($lastToken + 1)]['line'] === $startLine) {
-            $lastToken++;
-            $stackPtr++;
-        }
-
         // Find the next non whitespace token.
         $commentStart = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
 
-        // Allow declare() statements at the top of the file.
-        if ($tokens[$commentStart]['code'] === T_DECLARE) {
+        // Allow namespace at top of file.
+        if ($tokens[$commentStart]['code'] === T_NAMESPACE) {
             $semicolon    = $phpcsFile->findNext(T_SEMICOLON, ($commentStart + 1));
             $commentStart = $phpcsFile->findNext(T_WHITESPACE, ($semicolon + 1), null, true);
         }
