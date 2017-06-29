@@ -5,6 +5,7 @@ CodeIgniter 4 Standard for [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_
 This is currently a work in progress.
  
 ## Install
+
 ### Composer install (coming soon).
 
 `cd /Path/To/MyProject`  
@@ -27,23 +28,28 @@ Set `standard ` paths to your local filesystem:
 
 #### Sniffing errors & warnings (reporting).
 
-Single file. 
+Single file.
+
 `phpcs /Path/To/MyFile.php --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
-Directory (recursion). 
+Directory (recursive).
+
 `phpcs /Path/To/MyProject --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
 #### Fixing fixable errors.
 
-Single file. 
+Single file.
+
 `phpcbf /Path/To/MyFile.php --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
-Directory (recursion). 
+Directory (recursive).
+
 `phpcbf /Path/To/MyProject --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
 ## Example editor configs
 
 ### SublimeText project config.
+
 Project > Edit Project
 
 Set it to your preference.
@@ -105,4 +111,5 @@ Set it to your preference.
 ```
 
 ## Credits
+
 Thanks to Greg Sherwood, Marc McIntyre, Andy Grunwald, Thomas Ernest and Erik Torsner, for providing open source code which helped me build this standard and a big thanks to [Squiz Labs](http://www.squizlabs.com) for creating [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer).
