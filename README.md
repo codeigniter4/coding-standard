@@ -25,18 +25,18 @@ Set `standard ` paths to your local filesystem:
 
 #### Sniffing errors & warnings (reporting).
 
-Single file.
+Single file. 
 `phpcs /Path/To/MyFile.php --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
-Directory (recursion).
+Directory (recursion). 
 `phpcs /Path/To/MyProject --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
 #### Fixing fixable errors.
 
-Single file.
+Single file. 
 `phpcbf /Path/To/MyFile.php --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
-Directory (recursion).
+Directory (recursion). 
 `phpcbf /Path/To/MyProject --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
 ## Example editor configs
@@ -48,57 +48,57 @@ Set it to your preference.
 
 ```
 {
-	"SublimeLinter":
-	{
-		"linters":
-		{
-			"phpcs":
-			{
-				"@disable": false,
-				"cmd": "/Path/To/php_codesniffer/bin/phpcs",
-				// Or if installed globally. "cmd": "phpcs",
-				"standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml"
-			}
-		}
-	},
-	"folders":
-	[
-		{
-			"path": "/Path/To/MyProject"
-		}
-	],
-	"settings":
-	{
-		"phpcs":
-		{
-			"extensions_to_execute":
-			[
-				"php"
-			],
-			"phpcs_executable_path": "/Path/To/php_codesniffer/bin/phpcs",
-			// Or if installed globally. "phpcbf_executable_path": "phpcs",
-			"phpcs_additional_args":
-			{
-				"--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
-				"-n": ""
-			},
-			"phpcbf_executable_path": "/Path/To/php_codesniffer/bin/phpcbf",
-			// Or if installed globally. "phpcbf_executable_path": "phpcbf",
-			"phpcbf_additional_args":
-			{
-				"--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
-				"-n": ""
-			},
-			// Execute the sniffer on file save. (Using contextual menu instead)
-			"phpcs_execute_on_save": false,
-			// Show the error list after save. (Using sublime linter instead)
-			"phpcs_show_errors_on_save": false,
-			// Show the errors in the quick panel so you can then goto line. (Gets annoying)
-			"phpcs_show_quick_panel": false,
-			// Turn the debug output on/off.
-			"show_debug": false
-		}
-	}
+    "SublimeLinter":
+    {
+        "linters":
+        {
+            "phpcs":
+            {
+                "@disable": false,
+                "cmd": "/Path/To/php_codesniffer/bin/phpcs",
+                // Or if installed globally. "cmd": "phpcs",
+                "standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml"
+            }
+        }
+    },
+    "folders":
+    [
+        {
+            "path": "/Path/To/MyProject"
+        }
+    ],
+    "settings":
+    {
+        "phpcs":
+        {
+            "extensions_to_execute":
+            [
+                "php"
+            ],
+            "phpcs_executable_path": "/Path/To/php_codesniffer/bin/phpcs",
+            // Or if installed globally. "phpcbf_executable_path": "phpcs",
+            "phpcs_additional_args":
+            {
+                "--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
+                "-n": ""
+            },
+            "phpcbf_executable_path": "/Path/To/php_codesniffer/bin/phpcbf",
+            // Or if installed globally. "phpcbf_executable_path": "phpcbf",
+            "phpcbf_additional_args":
+            {
+                "--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
+                "-n": ""
+            },
+            // Execute the sniffer on file save. (Using contextual menu instead)
+            "phpcs_execute_on_save": false,
+            // Show the error list after save. (Using sublime linter instead)
+            "phpcs_show_errors_on_save": false,
+            // Show the errors in the quick panel so you can then goto line. (Gets annoying)
+            "phpcs_show_quick_panel": false,
+            // Turn the debug output on/off.
+            "show_debug": false
+        }
+    }
 }
 ```
 
