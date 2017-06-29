@@ -1,6 +1,16 @@
 {
 	"name": "louisl/CodeIgniter4-Standard",
 	"description": "CodeIgniter 4 Standard for PHP_CodeSniffer 3.",
+	"version":"1.0.0-beta0001",
+	"license":"MIT",
+	"authors": [
+        {
+            "name": "Louis Linehan",
+            "email": "louis.linehan@gmail.com",
+            "homepage": "https://github.com/louisl",
+            "role": "Developer"
+        }
+    ],
 	"require": {
 	},
 	"require-dev": {
