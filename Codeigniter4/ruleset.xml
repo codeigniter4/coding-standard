@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="CodeIgniter4">
+    <description>CodeIgniter 4 coding standard for PHP_CodeSniffer</description>
+    <!-- 
+     * CodeIgniter 4 coding standard for PHP_CodeSniffer
+     *
+     * @author    Louis Linehan <louis.linehan@gmail.com>
+     * @copyright 2017 Louis Linehan
+     * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
+    -->
+    <arg name="tab-width" value="4"/>
+    <arg name="ignore" value="*/ThirdParty/*"/>
+    <rule ref="Generic.Files.ByteOrderMark"/>
+    <rule ref="PSR2.Files.EndFileNewline"/>
+    <rule ref="Generic.Commenting.DocComment"/>
+    <rule ref="PEAR.Commenting.FunctionComment"/>
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <rule ref="CodeIgniter4.Commenting.FileComment">
+        <properties>
+          <property name="error" value="false"/>
+        </properties>
+    </rule>
+    <rule ref="CodeIgniter4.Commenting.ClassComment"/>
+    <rule ref="Squiz.Commenting.VariableComment">
+        <properties>
+          <property name="error" value="false"/>
+        </properties>
+    </rule>
+    <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+    <rule ref="CodeIgniter4.Operators.BooleanOr"/>
+    <rule ref="CodeIgniter4.Operators.BooleanAnd"/>
+    <rule ref="CodeIgniter4.WhiteSpace.BooleanNotSpaceAfter"/>
+    <rule ref="CodeIgniter4.Operators.IsIdentical"/>
+    <rule ref="CodeIgniter4.Operators.IsNotIdentical"/>
+    <rule ref="CodeIgniter4.PHP.DiscouragedFunctions"/>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace">
+        <properties>
+            <property name="ignoreBlankLines" value="false"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
+        <severity>0</severity>
+    </rule>
+    <rule ref="CodeIgniter4.Files.OneClassPerFile"/>
+    <rule ref="Generic.WhiteSpace.ScopeIndent">
+        <properties>
+            <property name="tabIndent" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+    <rule ref="Generic.Files.LineEndings">
+        <properties>
+            <property name="eolChar" value="\n"/>
+        </properties>
+    </rule>
+    <rule ref="Generic.Functions.OpeningFunctionBraceBsdAllman"/>
+    <rule ref="CodeIgniter4.ControlStructures.AllmanControlSignature"/>
+    <rule ref="CodeIgniter4.ControlStructures.ControlStructureSpacing"/>
+    <rule ref="Generic.Functions.FunctionCallArgumentSpacing"/>
+    <rule ref="Squiz.Scope.MethodScope"/>
+    <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+    <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="0"/>
+        </properties>
+    </rule>
+    <rule ref="PEAR.Functions.ValidDefaultValue"/>
+    <rule ref="CodeIgniter4.Functions.FunctionDeclaration"/> 
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <properties>
+            <property name="equalsSpacing" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterHint"> 
+        <severity>0</severity>
+    </rule>
+    <!--
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">                     
+        <properties>
+            <property name="spacing" value="1" />
+        </properties>
+    </rule>
+    @todo clash here.
+    -->
+    <rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace"/>
+    <rule ref="CodeIgniter4.WhiteSpace.FunctionClosingBraceSpace">
+        <properties>
+            <property name="allowedLines" value="0" />
+        </properties>
+    </rule>
+    <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
+    <rule ref="Squiz.ControlStructures.ForLoopDeclaration"/>
+    <rule ref="Generic.ControlStructures.InlineControlStructure"/>
+    <rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Squiz.Strings.ConcatenationSpacing">
+        <properties>
+          <property name="spacing" value="1"/>
+          <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
+        <properties>
+          <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="CodeIgniter4.Files.FilenameMatchesClass"/>
+    <rule ref="PSR2.Namespaces.NamespaceDeclaration"/>
+    <rule ref="PSR2.Namespaces.UseDeclaration"/>
+    <rule ref="Generic.PHP.LowerCaseKeyword"/>
+    <rule ref="Generic.PHP.LowerCaseConstant"/>
+    <rule ref="Squiz.NamingConventions.ValidVariableName"/>
+    <rule ref="CodeIgniter4.NamingConventions.ValidMethodName"/>
+</ruleset>

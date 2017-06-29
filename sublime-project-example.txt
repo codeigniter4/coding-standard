@@ -1,0 +1,43 @@
+{
+	"SublimeLinter":
+	{
+		"linters":
+		{
+			"phpcs":
+			{
+				"@disable": false,
+				"cmd": "/Path/To/php_codesniffer/bin/phpcs",
+				"standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/phpcs.xml"
+			}
+		}
+	},
+	"folders":
+	[
+		{
+			"path": "/Path/To/MyProject"
+		}
+	],
+	"settings":
+	{
+		"phpcs":
+		{
+			"extensions_to_execute":
+			[
+				"php"
+			],
+			"phpcbf_executable_path": "/Path/To/php_codesniffer/bin/phpcbf",
+			"phpcbf_additional_args":
+			{
+				"--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/phpcs.xml",
+				"-n": ""
+			},
+			"phpcs_executable_path": "/Path/To/php_codesniffer/bin/phpcs",
+			"phpcs_additional_args":
+			{
+				"--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/phpcs.xml",
+				"-n": ""
+			},
+			"show_debug": true
+		}
+	}
+}
