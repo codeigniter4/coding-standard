@@ -2,6 +2,8 @@
 
 CodeIgniter 4 Standard for [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
+Version 1.0.0-beta0003
+
 This is currently a work in progress.
  
 ## Install
@@ -10,7 +12,7 @@ This is currently a work in progress.
 
 `cd /Path/To/MyProject`  
 
-`composer require louisl/CodeIgniter4-Standard --dev`  
+`composer require louisl/codeigniter4-standard --dev`  
 
 Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin config to:
 
