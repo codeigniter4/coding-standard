@@ -17,11 +17,11 @@ As this is a beta version you will need to add `"minimum-stability": "dev"` to y
 
 Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin config to:
 
-`/Path/To/MyProject/vendor/louisl/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml`
+`/Path/To/MyProject/vendor/louisl/codeigniter4-standard/CodeIgniter4/ruleset.xml`
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/master.zip).
+Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0004.zip).
 
 Set `standard ` paths to your local filesystem:
 
