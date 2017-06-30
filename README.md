@@ -2,6 +2,8 @@
 
 CodeIgniter 4 Standard for [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
+Version 1.0.0-beta0003
+
 This is currently a work in progress.
  
 ## Install
