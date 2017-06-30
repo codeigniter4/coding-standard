@@ -10,8 +10,9 @@ This is currently a work in progress.
 
 ### Composer install.
 
-`cd /Path/To/MyProject`  
+As this is a beta version you will need to add `"minimum-stability": "dev"` to your 'composer.json' file.
 
+`cd /Path/To/MyProject`  
 `composer require louisl/codeigniter4-standard:1.* --dev`  
 
 Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin config to:
