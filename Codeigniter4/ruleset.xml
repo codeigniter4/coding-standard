@@ -63,8 +63,7 @@
     -->
     <rule ref="CodeIgniter4.Commenting.ClassComment"/>
     <!--
-    for 
-    Variables that have a comment.
+    For variables that have a comment.
     - Checks tag order, format and spacing.
     -->
     <rule ref="Squiz.Commenting.VariableComment">
@@ -98,11 +97,12 @@
     <rule ref="CodeIgniter4.Operators.IsNotIdentical"/>
     <!--
     Warning for discouraged functions.
-    error_log
-    print_r
-    var_dump
-    last_query
-    enable_profiler
+    'error_log',
+    'print_r',
+    'var_dump',
+    'last_query',
+    'enable_profiler'
+    @todo subject to change.
     -->
     <rule ref="CodeIgniter4.PHP.DiscouragedFunctions"/>
     <!--
@@ -116,6 +116,9 @@
     <!--
     There should be once class per file, execept for cases where
     breaking this rule makes more sense.
+    'Exception.php',
+    'Response.php'
+    @todo subject to change.
     -->
     <rule ref="CodeIgniter4.Files.OneClassPerFile"/>
     <!--
@@ -202,7 +205,7 @@
             <property name="spacing" value="1" />
         </properties>
     </rule>
-    @todo clash here.
+    @todo Clash here with function scopes using if (function_exists.
     -->
     <!--
     Checks there are no blank lines after a function opening brace.
@@ -233,7 +236,7 @@
     -->
     <rule ref="Generic.Commenting.Todo"/>
     <!--
-    Check concatenation spacing and if needed.
+    Check concatenation spacing and if concatenation is needed.
     -->
     <rule ref="Squiz.Strings.ConcatenationSpacing">
         <properties>
@@ -279,6 +282,20 @@
     Checks method names
     private, protected _lowerCamelCase()
     public lowerCamelCase() except allowed public method names.
+    '_init',
+    '_remap',
+    '_like_statement',
+    '_prepare',
+    '_execute',
+    '_getResult',
+    '_backup',
+    '_fieldData',
+    '_indexData',
+    '_flip',
+    '_resize',
+    '_crops',
+    '_text'
+    @todo subject to change.
     -->
     <rule ref="CodeIgniter4.NamingConventions.ValidMethodName"/>
 </ruleset>
