@@ -74,6 +74,14 @@ class AllmanControlSignatureSniff implements Sniff
             || $tokens[$stackPtr]['code'] === T_WHILE
             || $tokens[($stackPtr)]['code'] === T_ELSE
         ) {
+            // If this is alternate syntax ":" instead of ":" then skip it.
+            if (isset($tokens[$stackPtr]['scope_opener']) === true) {
+                $openingBracePtr = $tokens[$stackPtr]['scope_opener'];
+                if ($tokens[$openingBracePtr]['code'] === T_COLON) {
+                    return;
+                }
+            }
+
             $prevContentPtr = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
 
             // Skip if this T_IF is part of an else if.
@@ -135,6 +143,14 @@ class AllmanControlSignatureSniff implements Sniff
         if (isset($tokens[$stackPtr]['scope_opener']) === true) {
             $openingBracePtr = $tokens[$stackPtr]['scope_opener'];
             $braceLine       = $tokens[$openingBracePtr]['line'];
+
+            // If this is alternate syntax ":" instead of ":" then skip it.
+            if (isset($tokens[$stackPtr]['scope_opener']) === true) {
+                $openingBracePtr = $tokens[$stackPtr]['scope_opener'];
+                if ($tokens[$openingBracePtr]['code'] === T_COLON) {
+                    return;
+                }
+            }
 
             if ($tokens[($stackPtr)]['code'] === T_ELSE
                 || $tokens[($stackPtr)]['code'] === T_TRY
