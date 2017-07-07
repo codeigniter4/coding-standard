@@ -18,8 +18,8 @@ use PHP_CodeSniffer\Files\File;
  * Valid Method Name Sniff
  *
  * Checks class methods are lowerCameCase.
- * Checks public methods are not prefixed with "_" execept
- * methiods defined in allowedPublicMethodNames.
+ * Checks public methods are not prefixed with "_" except
+ * methods defined in allowedPublicMethodNames.
  * Checks private and protected methods are prefixed with "_".
  * Checks functions are snake_case.
  * Warns if names are longer than 50 characters.

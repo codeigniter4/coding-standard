@@ -14,7 +14,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
 /**
- * Boolean Or Sniff
+ * Is Not Identical Sniff
  *
  * Check for is not equal '!=' operator, should use is not identical '!=='.
  *

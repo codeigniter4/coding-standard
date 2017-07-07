@@ -20,7 +20,6 @@ use PHP_CodeSniffer\Files\File;
  *
  * @author Louis Linehan <louis.linehan@gmail.com>
  */
-
 class BooleanAndSniff implements Sniff
 {
 

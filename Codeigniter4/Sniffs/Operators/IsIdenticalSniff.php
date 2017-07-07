@@ -14,13 +14,12 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
 /**
- * Boolean Or Sniff
+ * Is Identical Sniff
  *
  * Check for is equal '==' operator, should use is identical '==='.
  *
  * @author Louis Linehan <louis.linehan@gmail.com>
  */
-
 class IsIdenticalSniff implements Sniff
 {
 
