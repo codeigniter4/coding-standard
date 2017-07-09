@@ -121,6 +121,8 @@
     @todo subject to change.
     -->
     <rule ref="CodeIgniter4.Files.OneClassPerFile"/>
+    <rule ref="Generic.Files.OneInterfacePerFile"/>
+    <rule ref="Generic.Files.OneTraitPerFile"/>
     <!--
     Checks tabs are used for indenting scopes.
     -->
@@ -277,25 +279,45 @@
     private, protected _lowerCamelCase
     public lowerCamelCase
     -->
-    <rule ref="Squiz.NamingConventions.ValidVariableName"/>
+    <rule ref="CodeIgniter4.NamingConventions.ValidVariableName"/>
     <!--
-    Checks method names
-    private, protected _lowerCamelCase()
-    public lowerCamelCase() except allowed public method names.
-    '_init',
-    '_remap',
-    '_like_statement',
-    '_prepare',
-    '_execute',
-    '_getResult',
-    '_backup',
-    '_fieldData',
-    '_indexData',
-    '_flip',
-    '_resize',
-    '_crops',
-    '_text'
+    Checks method names are lowerCamelCase() except allowed public method names.
+    '_remap'
     @todo subject to change.
     -->
     <rule ref="CodeIgniter4.NamingConventions.ValidMethodName"/>
+    <!--
+    Checks function names outside scope are snake_case
+    -->
+    
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/> 
+
+    <!-- <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.StartFile">
+        <severity>0</severity>
+    </rule> -->
+    <!-- <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EndFile">
+        <severity>0</severity>
+    </rule> -->
+    <!-- <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines">
+        <severity>0</severity>
+    </rule> -->
+
+    <!-- Have 20 chars padding maximum and always show as errors -->
+    <rule ref="Generic.Formatting.MultipleStatementAlignment">
+        <properties>
+            <property name="maxPadding" value="20"/>
+            <property name="error" value="true"/>
+        </properties>
+    </rule>
+
+    <rule ref="Squiz.Arrays.ArrayDeclaration"/>
+    <rule ref="Squiz.Arrays.ArrayDeclaration.CloseBraceNotAligned">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Arrays.ArrayDeclaration.KeyNotAligned">
+        <severity>0</severity>
+    </rule>
+
+    
+
 </ruleset>
