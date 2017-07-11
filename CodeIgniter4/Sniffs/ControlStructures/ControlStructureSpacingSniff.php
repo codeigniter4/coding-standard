@@ -96,9 +96,6 @@ class ControlStructureSpacingSniff implements Sniff
             }
         }
 
-        // Spaces after control structure open parenthesis.
-        $phpcsFile->recordMetric($stackPtr, 'Spaces after control structure open parenthesis', $spaceAfterOpen);
-
         if ($spaceAfterOpen !== $this->requiredSpacesAfterOpen) {
             $error = 'Expected %s spaces after opening bracket; %s found';
             $data  = array(
@@ -124,8 +121,6 @@ class ControlStructureSpacingSniff implements Sniff
             if ($tokens[($parenCloser - 1)]['code'] === T_WHITESPACE) {
                 $spaceBeforeClose = strlen(ltrim($tokens[($parenCloser - 1)]['content'], $phpcsFile->eolChar));
             }
-
-            $phpcsFile->recordMetric($stackPtr, 'Spaces before control structure close parenthesis', $spaceBeforeClose);
 
             if ($spaceBeforeClose !== $this->requiredSpacesBeforeClose) {
                 $error = 'Expected %s spaces before closing bracket; %s found';
