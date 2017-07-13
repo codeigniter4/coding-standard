@@ -171,11 +171,7 @@ class FileCommentSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        if (get_class($this) === 'CodeIgniter3FileCommentSniff') {
-            $docBlock = 'file';
-        } else {
-            $docBlock = 'class';
-        }
+        $docBlock = 'file';
 
         $commentEnd = $tokens[$commentStart]['comment_closer'];
 
@@ -285,7 +281,7 @@ class FileCommentSniff implements Sniff
             }
 
             if ($isInvalidPackage === true) {
-                $error     = 'Package name "%s" is not valid; consider "%s" instead.';
+                $error     = 'Package name "%s" is not valid. Use "%s" instead';
                 $validName = trim($newName, '_');
                 $data      = array(
                               $content,
@@ -366,12 +362,16 @@ class FileCommentSniff implements Sniff
             }
 
             $content = $tokens[($tag + 2)]['content'];
-            $local   = '\da-zA-Z-_+';
-            // Dot character cannot be the first or last character in the local-part.
-            $localMiddle = $local.'.\w';
-            if (preg_match('/^([^<]*)\s+<(['.$local.'](['.$localMiddle.']*['.$local.'])*@[\da-zA-Z][-.\w]*[\da-zA-Z]\.[a-zA-Z]{2,7})>$/', $content) === 0) {
-                $error = 'Content of the @author tag must be in the form "Display Name <username@example.com>"';
-                $phpcsFile->addError($error, $tag, 'InvalidAuthors');
+
+            // If it has an @ it's probably contains email address.
+            if (strrpos($content, '@') !== false) {
+                $local = '\da-zA-Z-_+';
+                // Dot character cannot be the first or last character in the local-part.
+                $localMiddle = $local.'.\w';
+                if (preg_match('/^([^<]*)\s+<(['.$local.'](['.$localMiddle.']*['.$local.'])*@[\da-zA-Z][-.\w]*[\da-zA-Z]\.[a-zA-Z]{2,7})>$/', $content) === 0) {
+                    $error = '"@author" with email must be "Display Name <username@example.com>"';
+                    $phpcsFile->addError($error, $tag, 'InvalidAuthors');
+                }
             }
         }
 
@@ -411,7 +411,7 @@ class FileCommentSniff implements Sniff
                     }
                 }
             } else {
-                $error = '@copyright tag must contain a year and the name of the copyright holder';
+                $error = '"@copyright" must be "YYYY [- YYYY] Name of the copyright holder"';
                 $phpcsFile->addError($error, $tag, 'IncompleteCopyright');
             }
         }//end foreach
