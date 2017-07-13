@@ -135,7 +135,7 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                     $phpcsFile->fixer->beginChangeset();
                     $changeMade = false;
                     for ($i = ($prevContent + 1); $i < $closeBrace; $i++) {
-                        // Try and maintain indentation.
+                        // Try to maintain indentation.
                         if ($tokens[$i]['line'] === ($braceLine - 1)) {
                             break;
                         }
