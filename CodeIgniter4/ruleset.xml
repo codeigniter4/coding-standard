@@ -7,8 +7,43 @@
      * @author    Louis Linehan <louis.linehan@gmail.com>
      * @copyright 2017 Louis Linehan
      * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
-     * @version   Version 1.0.0-beta0005
+     * @version   Version 1.0.0-beta0006
     -->
+    <!--
+    Files MUST have a doc block comment.
+    -->
+    <rule ref="CodeIgniter4.Commenting.FileComment">
+        <properties>
+          <property name="error" value="true"/>
+        </properties>
+    </rule>
+    <!--
+    Classes MUST have a doc block comment.
+    -->
+    <rule ref="Squiz.Commenting.ClassComment"/>
+    <!--
+    Properties MUST have a doc block comment.
+    -->
+    <rule ref="Squiz.Commenting.VariableComment"/>
+    <!--
+    Methods and functions MUST have a doc block comment.
+    -->
+    <rule ref="Squiz.Commenting.FunctionComment"/>
+    <!-- 
+    @todo remove this once it works - doesn't like multi-line param
+    comments.
+    -->
+    <rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamName">
+        <severity>0</severity>
+    </rule>
+    <!--
+    Doc block comment alignment.
+    -->
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <!--
+    Doc block comment format and spacing.
+    -->
+    <rule ref="Generic.Commenting.DocComment"/>
     <!--
     Tab width is 4 spaces (for phpcs)
     -->
@@ -22,7 +57,7 @@
     -->
     <rule ref="Generic.Files.ByteOrderMark"/>
     <!--
-    Files MUST NOT have the PHP closing tag '?>' at the as the last content.
+    Files MUST NOT have the PHP closing tag '?>' at the end as the last content.
     Files MUST END with a single empty line.
     -->
     <rule ref="PSR2.Files.EndFileNewline"/>
@@ -35,42 +70,6 @@
     -->
     <rule ref="Generic.PHP.DisallowShortOpenTag.EchoFound">
         <severity>0</severity>
-    </rule>
-    <!--
-    Files MUST have a File doc block comment.
-    - Checks tag order, format and spacing.
-    -->
-    <rule ref="Generic.Commenting.DocComment"/>
-    <!--
-    Functions MUST have a doc block comment.
-    - Checks tag order, format and spacing.
-    -->
-    <rule ref="PEAR.Commenting.FunctionComment"/>
-    <!--
-    Checks doc block alignment.
-    -->
-    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
-    <!--
-    Checks file doc block comment required tags, and order, format and spacing.
-    -->
-    <rule ref="CodeIgniter4.Commenting.FileComment">
-        <properties>
-          <property name="error" value="false"/>
-        </properties>
-    </rule>
-    <!--
-    Checks class doc block comment required tags, and order, format and spacing.
-    -->
-    <rule ref="CodeIgniter4.Commenting.ClassComment"/>
-    <!--
-    for 
-    Variables that have a comment.
-    - Checks tag order, format and spacing.
-    -->
-    <rule ref="Squiz.Commenting.VariableComment">
-        <properties>
-          <property name="error" value="false"/>
-        </properties>
     </rule>
     <!--
     User defined constants must be upper case.
@@ -98,11 +97,9 @@
     <rule ref="CodeIgniter4.Operators.IsNotIdentical"/>
     <!--
     Warning for discouraged functions.
-    error_log
-    print_r
-    var_dump
-    last_query
-    enable_profiler
+    'print_r',
+    'var_dump'
+    @todo subject to change.
     -->
     <rule ref="CodeIgniter4.PHP.DiscouragedFunctions"/>
     <!--
@@ -114,10 +111,16 @@
     -->
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
     <!--
-    There should be once class per file, execept for cases where
+    There should be one class per file, execept for cases where
     breaking this rule makes more sense.
+    'Exception.php',
+    'Exceptions.php',
+    'Response.php'
+    @todo subject to change.
     -->
     <rule ref="CodeIgniter4.Files.OneClassPerFile"/>
+    <rule ref="Generic.Files.OneInterfacePerFile"/>
+    <rule ref="Generic.Files.OneTraitPerFile"/>
     <!--
     Checks tabs are used for indenting scopes.
     -->
@@ -202,7 +205,7 @@
             <property name="spacing" value="1" />
         </properties>
     </rule>
-    @todo clash here.
+    @todo Clash here with function scopes using if (function_exists.
     -->
     <!--
     Checks there are no blank lines after a function opening brace.
@@ -233,7 +236,7 @@
     -->
     <rule ref="Generic.Commenting.Todo"/>
     <!--
-    Check concatenation spacing and if needed.
+    Check concatenation spacing and if concatenation is needed.
     -->
     <rule ref="Squiz.Strings.ConcatenationSpacing">
         <properties>
@@ -270,15 +273,31 @@
     -->
     <rule ref="Generic.PHP.LowerCaseConstant"/>
     <!--
-    Checks variable names
-    private, protected _lowerCamelCase
-    public lowerCamelCase
+    Checks variable names are lowerCamelCase().
+    This is a loose check and will allow acronyms.
     -->
-    <rule ref="Squiz.NamingConventions.ValidVariableName"/>
+    <rule ref="CodeIgniter4.NamingConventions.ValidVariableName"/>
     <!--
-    Checks method names
-    private, protected _lowerCamelCase()
-    public lowerCamelCase() except allowed public method names.
+    Checks method names are lowerCamelCase() except allowed public method names.
+    This is a loose check and will allow acronyms.
+    '_remap'
+    @todo subject to change.
     -->
     <rule ref="CodeIgniter4.NamingConventions.ValidMethodName"/>
+    <!--
+    Checks function names (outside scope) are snake_case.
+    -->
+    <rule ref="CodeIgniter4.NamingConventions.ValidFunctionName"/>
+    <!--
+    Checks arrays are declared as "[]" not "array()".
+    -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <!--
+    Checks statments on subsequent lines are aligned. (line up the "=").
+    -->
+    <rule ref="Generic.Formatting.MultipleStatementAlignment">
+        <properties>
+            <property name="error" value="true"/>
+        </properties>
+    </rule>
 </ruleset>

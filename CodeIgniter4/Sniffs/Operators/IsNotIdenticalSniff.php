@@ -1,6 +1,6 @@
 <?php
 /**
- * Is Identical
+ * Is Not Identical
  *
  * @package   CodeIgniter4-Standard
  * @author    Louis Linehan <louis.linehan@gmail.com>
@@ -14,14 +14,13 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
 /**
- * Boolean Or Sniff
+ * Is Not Identical Sniff
  *
- * Check for is equal '==' operator, should use is identical '==='.
+ * Check for is not equal '!=' operator, should use is not identical '!=='.
  *
  * @author Louis Linehan <louis.linehan@gmail.com>
  */
-
-class IsIdenticalSniff implements Sniff
+class IsNotIdenticalSniff implements Sniff
 {
 
 
@@ -32,7 +31,7 @@ class IsIdenticalSniff implements Sniff
      */
     public function register()
     {
-        return array(T_IS_EQUAL);
+        return array(T_IS_NOT_EQUAL);
 
     }//end register()
 
@@ -50,18 +49,13 @@ class IsIdenticalSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $error = false;
-
-        if ($tokens[$stackPtr]['code'] === T_IS_EQUAL) {
-            $error = '"%s" is not allowed, use "===" instead';
-        }
-
-        if ($error !== false) {
-            $data = array($tokens[$stackPtr]['content']);
-            $fix  = $phpcsFile->addFixableError($error, $stackPtr, 'IsEqualNotAllowed', $data);
+        if ($tokens[$stackPtr]['code'] === T_IS_NOT_EQUAL) {
+            $error = '"%s" is not allowed, use "!==" instead';
+            $data  = array($tokens[$stackPtr]['content']);
+            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'IsNotEqualNotAllowed', $data);
             if ($fix === true) {
                 $phpcsFile->fixer->beginChangeset();
-                $phpcsFile->fixer->replaceToken($stackPtr, '===');
+                $phpcsFile->fixer->replaceToken($stackPtr, '!==');
                 $phpcsFile->fixer->endChangeset();
             }
         }

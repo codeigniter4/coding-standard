@@ -122,7 +122,7 @@ class FunctionDeclarationSniff implements Sniff
             if ($spaces !== 0) {
                 $error = 'Expected 0 spaces before opening parenthesis; %s found';
                 $data  = array($spaces);
-                $fix   = $phpcsFile->addFixableError($error, $openBracket, 'SpaceBeforeOpenParen', $data);
+                $fix   = $phpcsFile->addFixableError($error, $openBracket, 'SpaceBeforeOpenParenthesis', $data);
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken(($openBracket - 1), '');
                 }

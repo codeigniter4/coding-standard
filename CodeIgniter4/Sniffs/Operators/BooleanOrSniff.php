@@ -49,15 +49,10 @@ class BooleanOrSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $error = false;
-
         if ($tokens[$stackPtr]['code'] === T_LOGICAL_OR) {
             $error = '"%s" is not allowed, use "||" instead';
-        }
-
-        if ($error !== false) {
-            $data = array($tokens[$stackPtr]['content']);
-            $fix  = $phpcsFile->addFixableError($error, $stackPtr, 'LogicalOrNotAllowed', $data);
+            $data  = array($tokens[$stackPtr]['content']);
+            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'LogicalOrNotAllowed', $data);
             if ($fix === true) {
                 $phpcsFile->fixer->beginChangeset();
                 $phpcsFile->fixer->replaceToken($stackPtr, '||');

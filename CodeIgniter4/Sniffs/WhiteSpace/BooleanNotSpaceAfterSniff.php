@@ -1,6 +1,6 @@
 <?php
 /**
- * Boolean And
+ * Boolean Not Space After
  *
  * @package   CodeIgniter4-Standard
  * @author    Louis Linehan <louis.linehan@gmail.com>
@@ -8,20 +8,19 @@
  * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
  */
 
-namespace CodeIgniter4\Sniffs\Operators;
+namespace CodeIgniter4\Sniffs\WhiteSpace;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 
 /**
- * Boolean And Sniff
+ * Boolean Not Space After Sniff
  *
- * Check that the 'and' operator is the boolean version '&&'.
+ * Checks there is a space after '!'.
  *
  * @author Louis Linehan <louis.linehan@gmail.com>
  */
-
-class BooleanAndSniff implements Sniff
+class BooleanNotSpaceAfterSniff implements Sniff
 {
 
 
@@ -32,7 +31,7 @@ class BooleanAndSniff implements Sniff
      */
     public function register()
     {
-        return array(T_LOGICAL_AND);
+        return array(T_BOOLEAN_NOT);
 
     }//end register()
 
@@ -50,21 +49,23 @@ class BooleanAndSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $error = false;
+        $nextToken = $tokens[($stackPtr + 1)];
+        if (T_WHITESPACE !== $nextToken['code']) {
+            $error = 'There must be a space after !';
+            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'BooleanNotNoWhiteSpaceAfter');
 
-        if ($tokens[$stackPtr]['code'] === T_LOGICAL_AND) {
-            $error = '"%s" is not allowed, use "&&" instead';
-        }
-
-        if ($error !== false) {
-            $data = array($tokens[$stackPtr]['content']);
-            $fix  = $phpcsFile->addFixableError($error, $stackPtr, 'LogicalAndNotAllowed', $data);
             if ($fix === true) {
+                $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
                 $phpcsFile->fixer->beginChangeset();
-                $phpcsFile->fixer->replaceToken($stackPtr, '&&');
+                for ($i = ($nextContentPtr + 1); $i < $stackPtr; $i++) {
+                    $phpcsFile->fixer->replaceToken($i, '');
+                }
+
+                $phpcsFile->fixer->addContent(($stackPtr), ' ');
                 $phpcsFile->fixer->endChangeset();
-            }
-        }
+                $phpcsFile->recordMetric($stackPtr, 'Boolean not space after', 'yes');
+            }//end if
+        }//end if
 
     }//end process()
 
