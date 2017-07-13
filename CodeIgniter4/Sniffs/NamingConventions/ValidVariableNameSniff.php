@@ -139,7 +139,7 @@ class ValidVariableNameSniff extends AbstractVariableSniff
             return;
         }
 
-        // Methods must not be prefixed with an underscore except those in publicMethodNames.
+        // Methods must not be prefixed with an underscore except those allowed in publicMethodNames.
         if (substr($varName, 0, 1) === '_') {
             if (isset(Common::$publicMethodNames[$varName]) === false) {
                 $scope     = $memberProps['scope'];
