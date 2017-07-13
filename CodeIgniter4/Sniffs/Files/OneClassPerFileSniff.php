@@ -32,6 +32,7 @@ class OneClassPerFileSniff implements Sniff
     public $filesAllowedMultiClass = array(
                                       'Exception.php',
                                       'Exceptions.php',
+                                      'CustomExceptions.php',
                                       'Response.php',
                                      );
 
