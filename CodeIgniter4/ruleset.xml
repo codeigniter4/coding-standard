@@ -11,6 +11,7 @@
     -->
     <!--
     Files MUST have a doc block comment.
+    Checks file comment tag format and order.
     -->
     <rule ref="CodeIgniter4.Commenting.FileComment">
         <properties>
@@ -21,6 +22,16 @@
     Classes MUST have a doc block comment.
     -->
     <rule ref="Squiz.Commenting.ClassComment"/>
+    <!--
+    Checks class comment tag format and order.
+    -->
+    <rule ref="CodeIgniter4.Commenting.ClassComment"/>
+    <!--
+    Allow class tags.
+    -->
+    <rule ref="Squiz.Commenting.ClassComment.TagNotAllowed">
+        <severity>0</severity>
+    </rule>
     <!--
     Properties MUST have a doc block comment.
     -->
