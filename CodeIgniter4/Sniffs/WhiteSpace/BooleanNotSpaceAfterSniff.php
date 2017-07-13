@@ -63,7 +63,7 @@ class BooleanNotSpaceAfterSniff implements Sniff
 
                 $phpcsFile->fixer->addContent(($stackPtr), ' ');
                 $phpcsFile->fixer->endChangeset();
-                $phpcsFile->recordMetric($stackPtr, 'Boolean not whitespace', 'no space after');
+                $phpcsFile->recordMetric($stackPtr, 'Boolean not space after', 'yes');
             }//end if
         }//end if
 
