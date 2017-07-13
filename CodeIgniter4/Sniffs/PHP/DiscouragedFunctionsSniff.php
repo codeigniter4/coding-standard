@@ -33,15 +33,12 @@ class DiscouragedFunctionsSniff extends ForbiddenFunctionsSniff
      * @var array(string => string|null)
      */
     public $forbiddenFunctions = array(
-                                  'error_log'       => null,
-                                  'print_r'         => null,
-                                  'var_dump'        => null,
-                                  'last_query'      => null,
-                                  'enable_profiler' => null,
+                                  'print_r'  => null,
+                                  'var_dump' => null,
                                  );
 
     /**
-     * Set rrror to false to show warnings.
+     * Set error to false to show warnings.
      *
      * @var boolean
      */
