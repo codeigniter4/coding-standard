@@ -9,36 +9,41 @@
      * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
      * @version   Version 1.0.0-beta0005
     -->
-
-    <!-- <rule ref="Squiz.Commenting.FileComment"/> -->
+    <!--
+    Files MUST have a doc block comment.
+    -->
     <rule ref="CodeIgniter4.Commenting.FileComment">
         <properties>
           <property name="error" value="true"/>
         </properties>
     </rule>
+    <!--
+    Classes MUST have a doc block comment.
+    -->
     <rule ref="Squiz.Commenting.ClassComment"/>
+    <!--
+    Properties MUST have a doc block comment.
+    -->
     <rule ref="Squiz.Commenting.VariableComment"/>
+    <!--
+    Methods and functions MUST have a doc block comment.
+    -->
     <rule ref="Squiz.Commenting.FunctionComment"/>
-
-    <!-- @todo broke it doesn't like multiline comments (contact squiz) -->
+    <!-- 
+    @todo remove this once it works - doesn't like multi-line param
+    comments.
+    -->
     <rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamName">
         <severity>0</severity>
     </rule>
-
-    <rule ref="Squiz.Commenting.FunctionComment.ParamCommentFullStop">
-        <severity>0</severity>
-    </rule>
-
-    
-
-    
+    <!--
+    Doc block comment alignment.
+    -->
     <rule ref="Squiz.Commenting.DocCommentAlignment"/>
-    <!-- <rule ref="Squiz.Commenting.BlockComment"/> -->
+    <!--
+    Doc block comment format and spacing.
+    -->
     <rule ref="Generic.Commenting.DocComment"/>
-
-
-
-
     <!--
     Tab width is 4 spaces (for phpcs)
     -->
@@ -67,41 +72,6 @@
         <severity>0</severity>
     </rule>
     <!--
-    Files MUST have a File doc block comment.
-    - Checks tag order, format and spacing.
-    -->
-    <!-- <rule ref="Generic.Commenting.DocComment"/> ... -->
-    <!--
-    Functions MUST have a doc block comment.
-    - Checks tag order, format and spacing.
-    -->
-    <!-- <rule ref="PEAR.Commenting.FunctionComment"/> ... -->
-    <!--
-    Checks doc block alignment.
-    -->
-    <!-- <rule ref="Squiz.Commenting.DocCommentAlignment"/> ... -->
-    <!--
-    Checks file doc block comment required tags, and order, format and spacing.
-    -->
-    <!-- <rule ref="CodeIgniter4.Commenting.FileComment">
-        <properties>
-          <property name="error" value="false"/>
-        </properties>
-    </rule> ... -->
-    <!--
-    Checks class doc block comment required tags, and order, format and spacing.
-    -->
-    <!-- <rule ref="CodeIgniter4.Commenting.ClassComment"/> ... -->
-    <!--
-    For variables that have a comment.
-    - Checks tag order, format and spacing.
-    -->
-    <!-- <rule ref="Squiz.Commenting.VariableComment">
-        <properties>
-          <property name="error" value="false"/>
-        </properties>
-    </rule> ... -->
-    <!--
     User defined constants must be upper case.
     -->
     <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
@@ -127,11 +97,8 @@
     <rule ref="CodeIgniter4.Operators.IsNotIdentical"/>
     <!--
     Warning for discouraged functions.
-    'error_log',
     'print_r',
-    'var_dump',
-    'last_query',
-    'enable_profiler'
+    'var_dump'
     @todo subject to change.
     -->
     <rule ref="CodeIgniter4.PHP.DiscouragedFunctions"/>
