@@ -2,7 +2,7 @@
 
 CodeIgniter 4 Standard for [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.0-beta0006
+Version 1.0.0-beta0007
 
 This is currently a work in progress.
  
@@ -21,7 +21,7 @@ Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin c
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0006.zip).
+Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0007.zip).
 
 Set `standard ` paths to your local filesystem:
 
@@ -91,14 +91,16 @@ Set it to your preference.
             "phpcs_additional_args":
             {
                 "--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
-                "-n": ""
+                // Optional don't show warnings
+                // "-n": ""
             },
             "phpcbf_executable_path": "/Path/To/php_codesniffer/bin/phpcbf",
             // Or if installed globally. "phpcbf_executable_path": "phpcbf",
             "phpcbf_additional_args":
             {
                 "--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
-                "-n": ""
+                // Optional don't fix warnings (if they're fixable)
+                // "-n": ""
             },
             // Execute the sniffer on file save. (Using contextual menu instead)
             "phpcs_execute_on_save": false,

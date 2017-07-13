@@ -171,7 +171,11 @@ class FileCommentSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $docBlock = 'file';
+        if (get_class($this) === 'FileCommentSniff') {
+            $docBlock = 'file';
+        } else {
+            $docBlock = 'class';
+        }
 
         $commentEnd = $tokens[$commentStart]['comment_closer'];
 
@@ -487,7 +491,7 @@ class FileCommentSniff implements Sniff
                 preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $parts[0], $matches);
                 if (count($matches) !== 1) {
                     $error = 'The URL must come before the description';
-                    $phpcsFile->addError($error, $tag, 'LicenseURLNotFirst');
+                    $phpcsFile->addError($error, $tag, 'LinkURLNotFirst');
                 }
             }
         }//end foreach
