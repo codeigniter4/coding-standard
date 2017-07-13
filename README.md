@@ -91,14 +91,16 @@ Set it to your preference.
             "phpcs_additional_args":
             {
                 "--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
-                "-n": ""
+                // Optional don't show warnings
+                // "-n": ""
             },
             "phpcbf_executable_path": "/Path/To/php_codesniffer/bin/phpcbf",
             // Or if installed globally. "phpcbf_executable_path": "phpcbf",
             "phpcbf_additional_args":
             {
                 "--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
-                "-n": ""
+                // Optional don't fix warnings (if they're fixable)
+                // "-n": ""
             },
             // Execute the sniffer on file save. (Using contextual menu instead)
             "phpcs_execute_on_save": false,
