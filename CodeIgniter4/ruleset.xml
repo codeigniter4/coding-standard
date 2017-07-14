@@ -126,6 +126,7 @@
     breaking this rule makes more sense.
     'Exception.php',
     'Exceptions.php',
+    'CustomExceptions.php',
     'Response.php'
     @todo subject to change.
     -->
@@ -144,6 +145,10 @@
     Checks tabs are used for indenting.
     -->
     <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+    <!--
+    Checks tabs are not used in alignment.
+    -->
+    <rule ref="CodeIgniter4.WhiteSpace.DisallowTabsInAlignment"/>
     <!--
     Checks line endings are unix "\n".
     -->
