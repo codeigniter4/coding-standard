@@ -40,13 +40,6 @@
     Methods and functions MUST have a doc block comment.
     -->
     <rule ref="Squiz.Commenting.FunctionComment"/>
-    <!-- 
-    @todo remove this once it works - doesn't like multi-line param
-    comments.
-    -->
-    <rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamName">
-        <severity>0</severity>
-    </rule>
     <!--
     Doc block comment alignment.
     -->
