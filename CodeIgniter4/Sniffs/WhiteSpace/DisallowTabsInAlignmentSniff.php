@@ -89,6 +89,7 @@ class DisallowTabsInAlignmentSniff implements Sniff
             }
 
             if (strpos($content, "\t") !== false) {
+                // Try to maintain intended alignment by counting tabs and spaces.
                 $countTabs   = substr_count($content, "\t");
                 $countSpaces = substr_count($content, " ");
 
