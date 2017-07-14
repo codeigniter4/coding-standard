@@ -53,9 +53,16 @@
     -->
     <arg name="tab-width" value="4"/>
     <!--
-    Ignore /ThirdParty/ directory. There could be a mix of styles in here.
+    Ignore application/Views/ directory. 
+    Ignore application/ThirdParty/ directory.
+    Ignore system/ThirdParty/ directory.
+    There could be a mix of styles in ThirdParty and View files 
+    could contain all sorts of indentation, alignments and scopes.
+    @todo subject to change.
     -->
-    <arg name="ignore" value="*/ThirdParty/*"/>
+    <arg
+    name="ignore"
+    value="*/application/Views/*,*/application/ThirdParty/*,*/system/ThirdParty/*"/>
     <!--
     Files MUST use UTF-8 character set encoding without BOM
     -->
