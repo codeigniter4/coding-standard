@@ -325,4 +325,9 @@
             <property name="error" value="true"/>
         </properties>
     </rule>
+    <!--
+    Checks *_helper.php files only contain functions
+    and that the filename is lower snake_case.
+    -->
+    <rule ref="CodeIgniter4.Files.HelperFile"/>
 </ruleset>

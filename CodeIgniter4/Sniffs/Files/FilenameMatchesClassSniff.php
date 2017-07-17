@@ -23,6 +23,15 @@ use PHP_CodeSniffer\Files\File;
 class FilenameMatchesClassSniff implements Sniff
 {
 
+    /**
+     * If the file has a bad filename.
+     *
+     * Change to true and check it later to avoid displaying multiple errors.
+     *
+     * @var boolean
+     */
+    protected $badFilename = false;
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -53,16 +62,21 @@ class FilenameMatchesClassSniff implements Sniff
 
         $fileName = basename($phpcsFile->getFilename());
 
+        if (strpos($fileName, '_helper.php') !== false) {
+            return;
+        }
+
         $className = trim($phpcsFile->getDeclarationName($stackPtr));
 
-        if ($fileName !== $className.'.php') {
+        if ($fileName !== $className.'.php' && $this->badFilename === false) {
             $data  = array(
                       $fileName,
                       $className.'.php',
                      );
             $error = 'Filename "%s" doesn\'t match the expected filename "%s"';
-            $phpcsFile->addError($error, 1, 'NotFound', $data);
+            $phpcsFile->addError($error, 1, 'ClassBadFilename', $data);
             $phpcsFile->recordMetric(1, 'Filename matches class', 'no');
+            $this->badFilename = true;
         } else {
             $phpcsFile->recordMetric(1, 'Filename matches class', 'yes');
         }
