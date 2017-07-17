@@ -309,6 +309,15 @@
     -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <!--
+    Checks array bracket spaces.
+    -->
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+    <!--
+    Check array declaration, indentation, alignment and that the last item
+    has a trailing comma.
+    -->
+    <rule ref="CodeIgniter4.Arrays.ArrayDeclaration"/>
+    <!--
     Checks statments on subsequent lines are aligned. (line up the "=").
     -->
     <rule ref="Generic.Formatting.MultipleStatementAlignment">
