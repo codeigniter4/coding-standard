@@ -26,7 +26,7 @@ class ValidMethodNameUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return array(
-                5 => 1,
+                5 => 0,
                 6 => 1,
                 7 => 1,
                 8 => 1,
