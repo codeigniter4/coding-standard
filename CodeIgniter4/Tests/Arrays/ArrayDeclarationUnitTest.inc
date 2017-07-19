@@ -21,13 +21,24 @@ class MyClass {
 
 	// @todo this fails to fix.
 	// It's probably the comment in the empty array.
-	// public $globals = [
-	// 	'before' => [
-	// 		// 'csrf'
-	// 	],
-	// 	'after'  => [
-	// 		'toolbar'
-	// 	]
-	// ];
+	public $globals = [
+		'before' => [
+			// 'csrf'
+		],
+		'after'  => [
+			'toolbar'
+		]
+	];
+	/**
+	 * The default list of HTTP methods (and CLI for command line usage)
+	 * that is allowed if no other method is provided.
+	 *
+	 * @var array
+	 */
+	protected $defaultHTTPMethods = [
+		'options',
+		 'get',
+		 'head',
+	];
 
 }

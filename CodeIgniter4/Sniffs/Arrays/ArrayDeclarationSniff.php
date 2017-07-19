@@ -13,6 +13,7 @@ namespace CodeIgniter4\Sniffs\Arrays;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
+use CodeIgniter4\Util\Common;
 
 /**
  * Array Declaration Sniff
@@ -69,6 +70,7 @@ class ArrayDeclarationSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
+        //$phpcsFile->config->tabWidth = 4;
         if ($this->tabWidth === null) {
             if (isset($phpcsFile->config->tabWidth) === false || $phpcsFile->config->tabWidth === 0) {
                 // We have no idea how wide tabs are, so assume 4 spaces for fixing.
@@ -303,33 +305,37 @@ class ArrayDeclarationSniff implements Sniff
      */
     public function arrayDeclaredAt($phpcsFile, $stackPtr)
     {
-        $indentStart = $stackPtr;
-
         $tokens = $phpcsFile->getTokens();
 
+        // Possible indent starting token.
+        $indentStart = $stackPtr;
+
+         // Tokens that could come before an array declaration variable.
         $preTokens = array(
-                      T_VAR,
-                      T_PUBLIC,
-                      T_PRIVATE,
-                      T_PROTECTED,
-                      T_ARRAY_CAST,
+                      T_VAR         => true,
+                      T_PUBLIC      => true,
+                      T_PRIVATE     => true,
+                      T_PROTECTED   => true,
+                      T_ARRAY_CAST  => true,
+                      T_UNSET_CAST  => true,
+                      T_OBJECT_CAST => true,
                      );
 
-        $b = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
+        $before1 = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
 
         // Is it a variable.
         // - '$arr = [];'.
-        if ($tokens[$b]['code'] === T_VARIABLE) {
+        if ($tokens[$before1]['code'] === T_VARIABLE) {
             // Store this in case this is the start.
-            $indentStart = $b;
+            $indentStart = $before1;
 
             // Does it have visibility scope or a type hint?
             // - 'private $arr = [];'
             // - '(array) $arr = [];'.
-            $c = $phpcsFile->findPrevious(T_WHITESPACE, ($b - 1), null, true);
-            if (in_array($tokens[$c]['code'], $preTokens) === true) {
+            $before2 = $phpcsFile->findPrevious(T_WHITESPACE, ($before1 - 1), null, true);
+            if ($before2 !== false && isset($preTokens[$tokens[$before2]['code']]) === true) {
                 // It is preceded with scope or type.
-                $indentStart = $c;
+                $indentStart = $before2;
             }
         }
 
@@ -337,27 +343,27 @@ class ArrayDeclarationSniff implements Sniff
         // - '$obj->arr = [];'.
         // - 'MY_CONST = [];'
         // - 'const MY_CONST = [];.
-        if ($tokens[$b]['code'] === T_STRING) {
-            $c = $phpcsFile->findPrevious(T_WHITESPACE, ($b - 1), null, true);
+        if ($tokens[$before1]['code'] === T_STRING) {
+            $before2 = $phpcsFile->findPrevious(T_WHITESPACE, ($before1 - 1), null, true);
             // Is it a constant?
-            if ($tokens[$c]['code'] === T_CONST) {
-                $indentStart = $c;
+            if ($tokens[$before2]['code'] === T_CONST) {
+                $indentStart = $before2;
                 return $indentStart;
             }
 
             // Is it an object?
-            if ($tokens[$c]['code'] === T_OBJECT_OPERATOR) {
-                $indentStart = $c;
+            if ($tokens[$before2]['code'] === T_OBJECT_OPERATOR) {
+                $indentStart = $before2;
 
-                $d = $phpcsFile->findPrevious(T_WHITESPACE, ($c - 1), null, true);
-                if ($tokens[$d]['code'] === T_VARIABLE) {
-                    $indentStart = $d;
+                $before3 = $phpcsFile->findPrevious(T_WHITESPACE, ($before2 - 1), null, true);
+                if ($tokens[$before3]['code'] === T_VARIABLE) {
+                    $indentStart = $before3;
 
-                    // Does it have visibility scope or a type hint?
-                    $e = $phpcsFile->findPrevious(T_WHITESPACE, ($d - 1), null, true);
-                    if (in_array($tokens[$e]['code'], $preTokens) === true) {
+                    // Does it have visibility scope or a is it cast?
+                    $before4 = $phpcsFile->findPrevious(T_WHITESPACE, ($before3 - 1), null, true);
+                    if ($before4 !== false && isset($preTokens[$tokens[$before4]['code']]) === true) {
                         // It is preceded with scope or type.
-                        $indentStart = $e;
+                        $indentStart = $before4;
                     }
                 }
             }
@@ -602,49 +608,49 @@ class ArrayDeclarationSniff implements Sniff
         }//end for
 
         // Check for mutli-line arrays that should be single-line.
-        $singleValue = false;
+        // $singleValue = false;
 
-        if (empty($indices) === true) {
-            $singleValue = true;
-        } else if (count($indices) === 1 && $tokens[$lastToken]['code'] === T_COMMA) {
-            // There may be another array value without a comma.
-            $exclude     = Tokens::$emptyTokens;
-            $exclude[]   = T_COMMA;
-            $nextContent = $phpcsFile->findNext($exclude, ($indices[0]['value'] + 1), $arrayEnd, true);
-            if ($nextContent === false) {
-                $singleValue = true;
-            }
-        }
+        // if (empty($indices) === true) {
+        //     $singleValue = true;
+        // } else if (count($indices) === 1 && $tokens[$lastToken]['code'] === T_COMMA) {
+        //     // There may be another array value without a comma.
+        //     $exclude     = Tokens::$emptyTokens;
+        //     $exclude[]   = T_COMMA;
+        //     $nextContent = $phpcsFile->findNext($exclude, ($indices[0]['value'] + 1), $arrayEnd, true);
+        //     if ($nextContent === false) {
+        //         $singleValue = true;
+        //     }
+        // }
 
-        if ($singleValue === true) {
-            // Array cannot be empty, so this is a multi-line array with
-            // a single value. It should be defined on single line.
-            $error = 'Multi-line array contains a single value; use single-line array instead';
-            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'MultiLineNotAllowed');
+        // if ($singleValue === true) {
+        //     // Array cannot be empty, so this is a multi-line array with
+        //     // a single value. It should be defined on single line.
+        //     $error = 'Multi-line array contains a single value; use single-line array instead';
+        //     $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'MultiLineNotAllowed');
 
-            if ($fix === true) {
-                $phpcsFile->fixer->beginChangeset();
-                for ($i = ($arrayStart + 1); $i < $arrayEnd; $i++) {
-                    if ($tokens[$i]['code'] !== T_WHITESPACE) {
-                        break;
-                    }
+        //     if ($fix === true) {
+        //         $phpcsFile->fixer->beginChangeset();
+        //         for ($i = ($arrayStart + 1); $i < $arrayEnd; $i++) {
+        //             if ($tokens[$i]['code'] !== T_WHITESPACE) {
+        //                 break;
+        //             }
 
-                    $phpcsFile->fixer->replaceToken($i, '');
-                }
+        //             $phpcsFile->fixer->replaceToken($i, '');
+        //         }
 
-                for ($i = ($arrayEnd - 1); $i > $arrayStart; $i--) {
-                    if ($tokens[$i]['code'] !== T_WHITESPACE) {
-                        break;
-                    }
+        //         for ($i = ($arrayEnd - 1); $i > $arrayStart; $i--) {
+        //             if ($tokens[$i]['code'] !== T_WHITESPACE) {
+        //                 break;
+        //             }
 
-                    $phpcsFile->fixer->replaceToken($i, '');
-                }
+        //             $phpcsFile->fixer->replaceToken($i, '');
+        //         }
 
-                $phpcsFile->fixer->endChangeset();
-            }
+        //         $phpcsFile->fixer->endChangeset();
+        //     }
 
-            return;
-        }//end if
+        //     return;
+        // }//end if
 
         /*
             This section checks for arrays that don't specify keys.
@@ -709,22 +715,15 @@ class ArrayDeclarationSniff implements Sniff
                     $first = $phpcsFile->findFirstOnLine(T_WHITESPACE, $value['value'], true);
                     $found = ($tokens[$first]['column'] - 1);
 
-                    if (($expected / $this->tabWidth) > 1) {
-                        $plural = 's';
-                    } else {
-                        $plural = '';
-                    }
-
                     if ($found !== $expected) {
-                        $error = 'Array value not aligned correctly; expected %s %s%s but found %s';
+                        $error = 'Array value not aligned correctly; expected %s %s but found %s';
                         $data  = array(
                                   ($expected / $this->tabWidth),
-                                  $this->indentUnit,
-                                  $plural,
+                                  Common::pluralize($this->indentUnit, ($expected / $this->tabWidth)),
                                   ($found / $this->tabWidth),
                                  );
 
-                        $fix = $phpcsFile->addFixableError($error, $value['value'], 'ValueNotAligned2', $data);
+                        $fix = $phpcsFile->addFixableError($error, $value['value'], 'ValueNotAligned', $data);
                         if ($fix === true) {
                             if ($found === 0) {
                                 $phpcsFile->fixer->addContent(($value['value'] - 1), str_repeat(' ', $expected));
@@ -822,18 +821,12 @@ class ArrayDeclarationSniff implements Sniff
 
             if ($tokens[$index['index']]['column'] !== $indicesStart) {
                 $expected = ($indicesStart - 1);
-                if (($expected / $this->tabWidth) > 1) {
-                    $plural = 's';
-                } else {
-                    $plural = '';
-                }
 
                 $found = ($tokens[$index['index']]['column'] - 1);
-                $error = 'Array key not aligned correctly; expected %s %s%s but found %s';
+                $error = 'Array key not aligned correctly; expected %s %s but found %s';
                 $data  = array(
                           ($expected / $this->tabWidth),
-                          $this->indentUnit,
-                          $plural,
+                          Common::pluralize($this->indentUnit, ($expected / $this->tabWidth)),
                           ($found / $this->tabWidth),
                          );
 
@@ -851,17 +844,12 @@ class ArrayDeclarationSniff implements Sniff
 
             if ($tokens[$index['arrow']]['column'] !== $arrowStart) {
                 $expected = ($arrowStart - (mb_strlen($index['index_content']) + $tokens[$index['index']]['column']));
-                if (($expected) > 1) {
-                    $plural = 's';
-                } else {
-                    $plural = '';
-                }
 
                 $found = ($tokens[$index['arrow']]['column'] - (mb_strlen($index['index_content']) + $tokens[$index['index']]['column']));
-                $error = 'Array double arrow not aligned correctly; expected %s space%s but found %s';
+                $error = 'Array double arrow not aligned correctly; expected %s %s but found %s';
                 $data  = array(
                           $expected,
-                          $plural,
+                          Common::pluralize('space', $expected),
                           $found,
                          );
 
@@ -884,16 +872,10 @@ class ArrayDeclarationSniff implements Sniff
                     $found = 'newline';
                 }
 
-                if (($expected) > 1) {
-                    $plural = 's';
-                } else {
-                    $plural = '';
-                }
-
-                $error = 'Array value not aligned correctly; expected %s space%s but found %s';
+                $error = 'Array value not aligned correctly; expected %s %s but found %s';
                 $data  = array(
                           $expected,
-                          $plural,
+                          Common::pluralize('space', $expected),
                           $found,
                          );
 
