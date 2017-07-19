@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Allows child classes to override the
- * status code that is used in their API.
+ * Codes
  *
  * @var array
  */
@@ -10,3 +9,5 @@ $codes = [
 	'created'					 => 201,
 ];
 
+$a				 = 'a';
+$array 		   	 = 'array';

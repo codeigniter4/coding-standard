@@ -14,6 +14,7 @@ use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 class DisallowTabsInAlignmentUnitTest extends AbstractSniffUnitTest
 {
 
+
     /**
      * Returns the lines where errors should occur.
      *
@@ -25,7 +26,9 @@ class DisallowTabsInAlignmentUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return array(
-                10 => 1,
+                9  => 1,
+                12 => 1,
+                13 => 1,
                );
 
     }//end getErrorList()
