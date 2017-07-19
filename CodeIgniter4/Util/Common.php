@@ -93,4 +93,26 @@ class Common extends BaseCommon
     }//end hasUnderscorePrefix()
 
 
+    /**
+     * Pluralize
+     *
+     * Basic pluralize intended for use in error messages
+     * tab/s, space/s, error/s etc.
+     *
+     * @param string $string String.
+     * @param float  $num    Number.
+     *
+     * @return string
+     */
+    public static function pluralize($string, $num)
+    {
+        if ($num > 1) {
+            return $string.'s';
+        } else {
+            return $string;
+        }
+
+    }//end pluralize()
+
+
 }//end class
