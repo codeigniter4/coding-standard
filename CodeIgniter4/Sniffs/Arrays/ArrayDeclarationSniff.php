@@ -418,18 +418,11 @@ class ArrayDeclarationSniff implements Sniff
                 $expected = $this->tabWidth;
             }
 
-            if (($expected / $this->tabWidth) > 1) {
-                $plural = 's';
-            } else {
-                $plural = '';
-            }
-
             $found = ($tokens[$arrayEnd]['column'] - 1);
-            $error = 'Closing parenthesis not aligned correctly; expected %s %s%s but found %s';
+            $error = 'Closing parenthesis not aligned correctly; expected %s %s but found %s';
             $data  = array(
                       ($expected / $this->tabWidth),
-                      $this->indentUnit,
-                      $plural,
+                      Common::pluralize($this->indentUnit, ($expected / $this->tabWidth)),
                       ($found / $this->tabWidth),
                      );
 
@@ -707,7 +700,7 @@ class ArrayDeclarationSniff implements Sniff
                 } else if ($tokens[($value['value'] - 1)]['code'] === T_WHITESPACE) {
                     // Expected indent.
                     if ($tokens[$indentStart]['column'] > 1) {
-                        $expected = ($tokens[$indentStart]['column'] + $this->tabWidth);
+                        $expected = ($tokens[$indentStart]['column'] + $this->tabWidth - 1);
                     } else {
                         $expected = $this->tabWidth;
                     }
