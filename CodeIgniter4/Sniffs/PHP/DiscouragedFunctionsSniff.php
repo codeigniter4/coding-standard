@@ -33,8 +33,9 @@ class DiscouragedFunctionsSniff extends ForbiddenFunctionsSniff
      * @var array(string => string|null)
      */
     public $forbiddenFunctions = array(
-                                  'print_r'  => null,
-                                  'var_dump' => null,
+                                  'error_log' => null,
+                                  'print_r'   => null,
+                                  'var_dump'  => null,
                                  );
 
     /**
