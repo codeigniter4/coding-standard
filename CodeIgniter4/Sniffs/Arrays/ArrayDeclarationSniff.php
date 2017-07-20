@@ -70,7 +70,7 @@ class ArrayDeclarationSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        //$phpcsFile->config->tabWidth = 4;
+
         if ($this->tabWidth === null) {
             if (isset($phpcsFile->config->tabWidth) === false || $phpcsFile->config->tabWidth === 0) {
                 // We have no idea how wide tabs are, so assume 4 spaces for fixing.
@@ -396,8 +396,14 @@ class ArrayDeclarationSniff implements Sniff
         } else if ($tokens[$prevNonWhitespaceToken]['code'] === T_DOUBLE_ARROW) {
             // It's an array in an array.
             $indentStart = $phpcsFile->findPrevious(T_WHITESPACE, ($prevNonWhitespaceToken - 1), null, true);
+        } else if ($tokens[$prevNonWhitespaceToken]['code'] === T_OPEN_SHORT_ARRAY
+            || $tokens[$prevNonWhitespaceToken]['code'] === T_COMMA
+        ) {
+            // It's an array in an array.
+            $indentStart = $stackPtr;
         } else {
-            // Don't know what declares this so return here and ignore it.
+            // Nothing expected preceded this so return here and
+            // it should get picked in a future pass.
             return;
         }
 
@@ -599,51 +605,6 @@ class ArrayDeclarationSniff implements Sniff
                 $lastToken = $nextToken;
             }//end if
         }//end for
-
-        // Check for mutli-line arrays that should be single-line.
-        // $singleValue = false;
-
-        // if (empty($indices) === true) {
-        //     $singleValue = true;
-        // } else if (count($indices) === 1 && $tokens[$lastToken]['code'] === T_COMMA) {
-        //     // There may be another array value without a comma.
-        //     $exclude     = Tokens::$emptyTokens;
-        //     $exclude[]   = T_COMMA;
-        //     $nextContent = $phpcsFile->findNext($exclude, ($indices[0]['value'] + 1), $arrayEnd, true);
-        //     if ($nextContent === false) {
-        //         $singleValue = true;
-        //     }
-        // }
-
-        // if ($singleValue === true) {
-        //     // Array cannot be empty, so this is a multi-line array with
-        //     // a single value. It should be defined on single line.
-        //     $error = 'Multi-line array contains a single value; use single-line array instead';
-        //     $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'MultiLineNotAllowed');
-
-        //     if ($fix === true) {
-        //         $phpcsFile->fixer->beginChangeset();
-        //         for ($i = ($arrayStart + 1); $i < $arrayEnd; $i++) {
-        //             if ($tokens[$i]['code'] !== T_WHITESPACE) {
-        //                 break;
-        //             }
-
-        //             $phpcsFile->fixer->replaceToken($i, '');
-        //         }
-
-        //         for ($i = ($arrayEnd - 1); $i > $arrayStart; $i--) {
-        //             if ($tokens[$i]['code'] !== T_WHITESPACE) {
-        //                 break;
-        //             }
-
-        //             $phpcsFile->fixer->replaceToken($i, '');
-        //         }
-
-        //         $phpcsFile->fixer->endChangeset();
-        //     }
-
-        //     return;
-        // }//end if
 
         /*
             This section checks for arrays that don't specify keys.
