@@ -391,15 +391,18 @@ class ArrayDeclarationSniff implements Sniff
         $keywordStart = $tokens[$stackPtr]['column'];
 
         $prevNonWhitespaceToken = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
-        if ($tokens[$prevNonWhitespaceToken]['code'] === T_EQUAL) {
+        if ($tokens[$prevNonWhitespaceToken]['code'] === T_EQUAL
+            || $tokens[$prevNonWhitespaceToken]['code'] === T_OPEN_PARENTHESIS
+        ) {
+            // It's "=" or "(".
             $indentStart = $this->arrayDeclaredAt($phpcsFile, $prevNonWhitespaceToken);
         } else if ($tokens[$prevNonWhitespaceToken]['code'] === T_DOUBLE_ARROW) {
-            // It's an array in an array.
+            // It's an array in an array "=> []".
             $indentStart = $phpcsFile->findPrevious(T_WHITESPACE, ($prevNonWhitespaceToken - 1), null, true);
         } else if ($tokens[$prevNonWhitespaceToken]['code'] === T_OPEN_SHORT_ARRAY
             || $tokens[$prevNonWhitespaceToken]['code'] === T_COMMA
         ) {
-            // It's an array in an array.
+            // It's an array in an array "[[]]" or the end of an array line "[],".
             $indentStart = $stackPtr;
         } else {
             // Nothing expected preceded this so return here and
@@ -479,7 +482,6 @@ class ArrayDeclarationSniff implements Sniff
                 } else if ($tokens[$nextToken]['code'] === T_OPEN_SHORT_ARRAY) {
                     $nextToken = $tokens[$nextToken]['bracket_closer'];
                 } else {
-                    // T_CLOSURE.
                     $nextToken = $tokens[$nextToken]['scope_closer'];
                 }
 
