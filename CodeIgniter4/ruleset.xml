@@ -15,7 +15,7 @@
     -->
     <rule ref="CodeIgniter4.Commenting.FileComment">
         <properties>
-          <property name="error" value="true"/>
+            <property name="error" value="true"/>
         </properties>
     </rule>
     <!--
@@ -44,6 +44,12 @@
     Doc block comment alignment.
     -->
     <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <!--
+    Warn about //... comments after statments.
+    -->
+    <rule ref="Squiz.Commenting.PostStatementComment">
+        <type>warning</type>
+    </rule>
     <!--
     Doc block comment format and spacing.
     -->
@@ -256,8 +262,8 @@
     -->
     <rule ref="Squiz.Strings.ConcatenationSpacing">
         <properties>
-          <property name="spacing" value="1"/>
-          <property name="ignoreNewlines" value="true"/>
+            <property name="spacing" value="1"/>
+            <property name="ignoreNewlines" value="true"/>
         </properties>
     </rule>
     <!--
@@ -265,7 +271,7 @@
     -->
     <rule ref="Squiz.WhiteSpace.OperatorSpacing">
         <properties>
-          <property name="ignoreNewlines" value="true"/>
+            <property name="ignoreNewlines" value="true"/>
         </properties>
     </rule>
     <!--
