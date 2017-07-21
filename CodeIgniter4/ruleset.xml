@@ -52,6 +52,12 @@
         <exclude phpcbf-only="true" name="Squiz.Commenting.PostStatementComment.Found"/>
     </rule>
     <!--
+    Change the error message.
+    -->
+    <rule ref="Squiz.Commenting.PostStatementComment.Found">
+        <message>Comments should not appear after statements</message>
+    </rule>
+    <!--
     Doc block comment format and spacing.
     -->
     <rule ref="Generic.Commenting.DocComment"/>
