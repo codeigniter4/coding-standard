@@ -69,12 +69,11 @@ class FilenameMatchesClassSniff implements Sniff
             return;
         }
 
-        $className = trim($phpcsFile->getDeclarationName($stackPtr));
-
+        $className      = trim($phpcsFile->getDeclarationName($stackPtr));
         $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+        $type           = $tokens[$stackPtr]['content'];
 
         if ($fileName !== $className.'.php' && $this->badFilename === false) {
-            $type  = $tokens[$stackPtr]['content'];
             $data  = array(
                       $fileName,
                       $className.'.php',
