@@ -49,6 +49,7 @@
     -->
     <rule ref="Squiz.Commenting.PostStatementComment">
         <type>warning</type>
+        <exclude phpcbf-only="true" name="Squiz.Commenting.PostStatementComment.Found"/>
     </rule>
     <!--
     Doc block comment format and spacing.
