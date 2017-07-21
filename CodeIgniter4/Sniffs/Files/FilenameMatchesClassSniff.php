@@ -61,6 +61,8 @@ class FilenameMatchesClassSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
 
+        $tokens = $phpcsFile->getTokens();
+
         $fileName = basename($phpcsFile->getFilename());
 
         if (strpos($fileName, '_helper.php') !== false) {
@@ -69,19 +71,20 @@ class FilenameMatchesClassSniff implements Sniff
 
         $className = trim($phpcsFile->getDeclarationName($stackPtr));
 
-        if ($fileName !== $className.'.php' && $this->badFilename === false) {
-            $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+        $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
 
+        if ($fileName !== $className.'.php' && $this->badFilename === false) {
+            $type  = $tokens[$stackPtr]['content'];
             $data  = array(
                       $fileName,
                       $className.'.php',
                      );
             $error = 'Filename "%s" doesn\'t match the expected filename "%s"';
-            $phpcsFile->addError($error, $nextContentPtr, 'ClassBadFilename', $data);
-            $phpcsFile->recordMetric($nextContentPtr, 'Filename matches class', 'no');
+            $phpcsFile->addError($error, $nextContentPtr, ucfirst($type).'BadFilename', $data);
+            $phpcsFile->recordMetric($nextContentPtr, 'Filename matches '.$type, 'no');
             $this->badFilename = true;
         } else {
-            $phpcsFile->recordMetric($nextContentPtr, 'Filename matches class', 'yes');
+            $phpcsFile->recordMetric($nextContentPtr, 'Filename matches '.$type, 'yes');
         }
 
         // Ignore the rest of the file.
