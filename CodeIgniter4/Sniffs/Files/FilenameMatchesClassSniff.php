@@ -43,6 +43,7 @@ class FilenameMatchesClassSniff implements Sniff
         return array(
                 T_CLASS,
                 T_INTERFACE,
+                T_TRAIT,
                );
 
     }//end register()
@@ -69,16 +70,18 @@ class FilenameMatchesClassSniff implements Sniff
         $className = trim($phpcsFile->getDeclarationName($stackPtr));
 
         if ($fileName !== $className.'.php' && $this->badFilename === false) {
+            $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+
             $data  = array(
                       $fileName,
                       $className.'.php',
                      );
             $error = 'Filename "%s" doesn\'t match the expected filename "%s"';
-            $phpcsFile->addError($error, 1, 'ClassBadFilename', $data);
-            $phpcsFile->recordMetric(1, 'Filename matches class', 'no');
+            $phpcsFile->addError($error, $nextContentPtr, 'ClassBadFilename', $data);
+            $phpcsFile->recordMetric($nextContentPtr, 'Filename matches class', 'no');
             $this->badFilename = true;
         } else {
-            $phpcsFile->recordMetric(1, 'Filename matches class', 'yes');
+            $phpcsFile->recordMetric($nextContentPtr, 'Filename matches class', 'yes');
         }
 
         // Ignore the rest of the file.
