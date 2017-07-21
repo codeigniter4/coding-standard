@@ -54,6 +54,6 @@ script:
   # - Change the default standard.
   - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs --config-set installed_paths ../../../CodeIgniter4; fi
   # - Verify it's installed.
-  - if [[ "$SNIFF" == "1" ]]; then if [[ "$SNIFF" == "1" ]]; ./bin/phpcs -i; fi
+  - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs -i; fi
   # - Run Unit tests for CodeIgniter4 standard.
   - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpunit --debug --filter CodeIgniter4 ./tests/AllTests.php; fi
