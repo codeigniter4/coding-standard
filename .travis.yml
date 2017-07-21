@@ -39,7 +39,7 @@ matrix:
 before_install:
   # Install PHP CodeSniffer.
   - if [[ "$SNIFF" == "1" ]]; then composer self-update; fi
-  - if [[ "$SNIFF" == "1" ]]; then composer require -no-dev squizlabs/php_codesniffer:dev-master; fi
+  - if [[ "$SNIFF" == "1" ]]; then composer require squizlabs/php_codesniffer:dev-master; fi
   - if [[ "$SNIFF" == "1" ]]; then composer install; fi
   - phpenv rehash
 
