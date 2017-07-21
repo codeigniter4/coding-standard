@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/louisl/CodeIgniter4-Standard.svg?branch=master)](https://travis-ci.org/louisl/CodeIgniter4-Standard)
+[![Build Status](https://travis-ci.org/louisl/CodeIgniter4-Standard.svg?branch=develop)](https://travis-ci.org/louisl/CodeIgniter4-Standard)
+
 # CodeIgniter4-Standard
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).

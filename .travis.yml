@@ -49,11 +49,11 @@ script:
   - if [[ "$SNIFF" == "1" ]]; then cd ./vendor/squizlabs/php_codesniffer/; fi
   # Install php_codesniffer deps.
   - if [[ "$SNIFF" == "1" ]]; then composer install; fi
-  # - Check files match the PHPCS standard files.
+  # - Check files match the PHPCS standard.
   - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs --ignore=*/Tests/* ../../../CodeIgniter4; fi
   # - Change the default standard.
   - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs --config-set installed_paths ../../../CodeIgniter4; fi
   # - Verify it's installed.
   - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs -i; fi
-  # - Run Unit tests for CodeIgniter4 standard.
+  # - Run unit tests for CodeIgniter4 standard.
   - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpunit --debug --filter CodeIgniter4 ./tests/AllTests.php; fi
