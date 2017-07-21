@@ -23,6 +23,15 @@ use PHP_CodeSniffer\Files\File;
 class FilenameMatchesClassSniff implements Sniff
 {
 
+    /**
+     * If the file has a bad filename.
+     *
+     * Change to true and check it later to avoid displaying multiple errors.
+     *
+     * @var boolean
+     */
+    protected $badFilename = false;
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -34,6 +43,7 @@ class FilenameMatchesClassSniff implements Sniff
         return array(
                 T_CLASS,
                 T_INTERFACE,
+                T_TRAIT,
                );
 
     }//end register()
@@ -51,20 +61,29 @@ class FilenameMatchesClassSniff implements Sniff
     public function process(File $phpcsFile, $stackPtr)
     {
 
+        $tokens = $phpcsFile->getTokens();
+
         $fileName = basename($phpcsFile->getFilename());
 
-        $className = trim($phpcsFile->getDeclarationName($stackPtr));
+        if (strpos($fileName, '_helper.php') !== false) {
+            return;
+        }
 
-        if ($fileName !== $className.'.php') {
+        $className      = trim($phpcsFile->getDeclarationName($stackPtr));
+        $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
+        $type           = $tokens[$stackPtr]['content'];
+
+        if ($fileName !== $className.'.php' && $this->badFilename === false) {
             $data  = array(
                       $fileName,
                       $className.'.php',
                      );
             $error = 'Filename "%s" doesn\'t match the expected filename "%s"';
-            $phpcsFile->addError($error, 1, 'NotFound', $data);
-            $phpcsFile->recordMetric(1, 'Filename matches class', 'no');
+            $phpcsFile->addError($error, $nextContentPtr, ucfirst($type).'BadFilename', $data);
+            $phpcsFile->recordMetric($nextContentPtr, 'Filename matches '.$type, 'no');
+            $this->badFilename = true;
         } else {
-            $phpcsFile->recordMetric(1, 'Filename matches class', 'yes');
+            $phpcsFile->recordMetric($nextContentPtr, 'Filename matches '.$type, 'yes');
         }
 
         // Ignore the rest of the file.

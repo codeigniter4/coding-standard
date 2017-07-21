@@ -1,14 +1,24 @@
 # CodeIgniter4-Standard
 
-CodeIgniter 4 Standard for [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
+[CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.0-beta0007
+Version 1.0.0-beta0008
 
-This is currently a work in progress.
+***This is currently a work in progress.***
+
+*Requested at: https://github.com/bcit-ci/CodeIgniter4/issues/182*
+
+##Requirements
+
+[PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer). (3.0.2 or greater).
+
+PHP (5.4.0 or greater) with mbstring extension.
+
+
  
 ## Install
 
-### Composer install.
+### Composer install
 
 As this is a beta version you will need to add `"minimum-stability": "dev"` to your 'composer.json' file.
 
@@ -21,7 +31,7 @@ Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin c
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0007.zip).
+Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0008.zip).
 
 Set `standard ` paths to your local filesystem:
 
@@ -51,7 +61,7 @@ Directory (recursive).
 
 ## Example editor configs
 
-### SublimeText project config.
+### SublimeText project config
 
 Project > Edit Project
 
@@ -118,3 +128,6 @@ Set it to your preference.
 ## Credits
 
 Thanks to Greg Sherwood, Marc McIntyre, Andy Grunwald, Thomas Ernest and Erik Torsner, for providing open source code which helped me build this standard and a big thanks to [Squiz Labs](http://www.squizlabs.com) for creating [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer).
+
+Thanks to [EllisLab](https://ellislab.com) for originally creating CodeIgniter and the [British Columbia Institute of Technology](https://bcit.ca/) for continuing the project. Thanks to all the developers and contibutors working on [CodeIgniter 4](https://github.com/bcit-ci/CodeIgniter4).
+

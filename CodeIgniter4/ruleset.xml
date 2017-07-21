@@ -7,7 +7,7 @@
      * @author    Louis Linehan <louis.linehan@gmail.com>
      * @copyright 2017 Louis Linehan
      * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
-     * @version   Version 1.0.0-beta0007
+     * @version   Version 1.0.0-beta0008
     -->
     <!--
     Files MUST have a doc block comment.
@@ -15,7 +15,7 @@
     -->
     <rule ref="CodeIgniter4.Commenting.FileComment">
         <properties>
-          <property name="error" value="true"/>
+            <property name="error" value="true"/>
         </properties>
     </rule>
     <!--
@@ -40,17 +40,23 @@
     Methods and functions MUST have a doc block comment.
     -->
     <rule ref="Squiz.Commenting.FunctionComment"/>
-    <!-- 
-    @todo remove this once it works - doesn't like multi-line param
-    comments.
-    -->
-    <rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamName">
-        <severity>0</severity>
-    </rule>
     <!--
     Doc block comment alignment.
     -->
     <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <!--
+    Warn about //... comments after statments.
+    -->
+    <rule ref="Squiz.Commenting.PostStatementComment">
+        <type>warning</type>
+        <exclude phpcbf-only="true" name="Squiz.Commenting.PostStatementComment.Found"/>
+    </rule>
+    <!--
+    Change the error message.
+    -->
+    <rule ref="Squiz.Commenting.PostStatementComment.Found">
+        <message>Comments should not appear after statements</message>
+    </rule>
     <!--
     Doc block comment format and spacing.
     -->
@@ -60,9 +66,16 @@
     -->
     <arg name="tab-width" value="4"/>
     <!--
-    Ignore /ThirdParty/ directory. There could be a mix of styles in here.
+    Ignore application/Views/ directory. 
+    Ignore application/ThirdParty/ directory.
+    Ignore system/ThirdParty/ directory.
+    There could be a mix of styles in ThirdParty and View files 
+    could contain all sorts of indentation, alignments and scopes.
+    @todo subject to change.
     -->
-    <arg name="ignore" value="*/ThirdParty/*"/>
+    <arg
+    name="ignore"
+    value="*/application/Views/*,*/application/ThirdParty/*,*/system/ThirdParty/*"/>
     <!--
     Files MUST use UTF-8 character set encoding without BOM
     -->
@@ -126,6 +139,7 @@
     breaking this rule makes more sense.
     'Exception.php',
     'Exceptions.php',
+    'CustomExceptions.php',
     'Response.php'
     @todo subject to change.
     -->
@@ -144,6 +158,10 @@
     Checks tabs are used for indenting.
     -->
     <rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+    <!--
+    Checks tabs are not used in alignment.
+    -->
+    <rule ref="CodeIgniter4.WhiteSpace.DisallowTabsInAlignment"/>
     <!--
     Checks line endings are unix "\n".
     -->
@@ -251,8 +269,8 @@
     -->
     <rule ref="Squiz.Strings.ConcatenationSpacing">
         <properties>
-          <property name="spacing" value="1"/>
-          <property name="ignoreNewlines" value="true"/>
+            <property name="spacing" value="1"/>
+            <property name="ignoreNewlines" value="true"/>
         </properties>
     </rule>
     <!--
@@ -260,7 +278,7 @@
     -->
     <rule ref="Squiz.WhiteSpace.OperatorSpacing">
         <properties>
-          <property name="ignoreNewlines" value="true"/>
+            <property name="ignoreNewlines" value="true"/>
         </properties>
     </rule>
     <!--
@@ -304,6 +322,15 @@
     -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <!--
+    Checks array bracket spaces.
+    -->
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+    <!--
+    Check array declaration, indentation, alignment and that the last item
+    has a trailing comma.
+    -->
+    <rule ref="CodeIgniter4.Arrays.ArrayDeclaration"/>
+    <!--
     Checks statments on subsequent lines are aligned. (line up the "=").
     -->
     <rule ref="Generic.Formatting.MultipleStatementAlignment">
@@ -311,4 +338,9 @@
             <property name="error" value="true"/>
         </properties>
     </rule>
+    <!--
+    Checks *_helper.php files only contain functions
+    and that the filename is lower snake_case.
+    -->
+    <rule ref="CodeIgniter4.Files.HelperFile"/>
 </ruleset>
