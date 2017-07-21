@@ -47,5 +47,6 @@ script:
   # Search for PHP syntax errors.
   - find -L . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
   # Run PHPCS.
-
-  - if [[ "$SNIFF" == "1" ]]; then vendor/bin/phpcs . --ignore=*/Tests/* . CodeIgniter4 . --standard=./vendor/squizlabs/php_codesniffer/phpcs.xml.dist; fi
+  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpcs . --config-set installed_paths ./vendor/squizlabs/php_codesniffer/phpcs.xml.dist; fi
+  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpcs -i; fi
+  # - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpcs . --ignore=*/Tests/* . CodeIgniter4 . --standard=./vendor/squizlabs/php_codesniffer/phpcs.xml.dist; fi
