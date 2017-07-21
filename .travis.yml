@@ -27,6 +27,7 @@ matrix:
         - php: '7.0'
         # aliased to a recent 7.x version
         - php: '7.1'
+          # env: SNIFF=1
         # aliased to a recent hhvm version
         - php: 'hhvm'
         # php nightly
@@ -37,7 +38,7 @@ matrix:
         - php: nightly
 
 before_install:
-  # Install PHP CodeSniffer.
+  # Install CodeIgniter4-Standard deps.
   - if [[ "$SNIFF" == "1" ]]; then composer self-update; fi
   - if [[ "$SNIFF" == "1" ]]; then composer require squizlabs/php_codesniffer:dev-master; fi
   - if [[ "$SNIFF" == "1" ]]; then composer install; fi
@@ -46,7 +47,15 @@ before_install:
 script:
   # Search for PHP syntax errors.
   - find -L . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
-  # Run PHPCS.
-  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpcs . --config-set installed_paths ./vendor/squizlabs/php_codesniffer/phpcs.xml.dist; fi
-  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpcs -i; fi
-  # - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpcs . --ignore=*/Tests/* . CodeIgniter4 . --standard=./vendor/squizlabs/php_codesniffer/phpcs.xml.dist; fi
+  # Change dir.
+  - if [[ "$SNIFF" == "1" ]]; cd ./vendor/squizlabs/php_codesniffer/; fi
+  # Install php_codesniffer deps.
+  - if [[ "$SNIFF" == "1" ]]; composer install; fi
+  # - Check files match the PHPCS standard files.
+  - if [[ "$SNIFF" == "1" ]]; ./bin/phpcs --ignore=*/Tests/* ../../../CodeIgniter4; fi
+  # - Change the default standard.
+  - if [[ "$SNIFF" == "1" ]]; ./bin/phpcs --config-set installed_paths ../../../CodeIgniter4; fi
+  # - Verify it's installed.
+  - if [[ "$SNIFF" == "1" ]]; if [[ "$SNIFF" == "1" ]]; ./bin/phpcs -i; fi
+  # - Run Unit tests for CodeIgniter4 standard.
+  - if [[ "$SNIFF" == "1" ]]; ./vendor/bin/phpunit --debug --filter CodeIgniter4 ./tests/AllTests.php; fi
