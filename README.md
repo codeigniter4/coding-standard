@@ -2,7 +2,7 @@
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.0-beta0007
+Version 1.0.0-beta0008
 
 ***This is currently a work in progress.***
 
@@ -31,7 +31,7 @@ Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin c
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0007.zip).
+Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0008.zip).
 
 Set `standard ` paths to your local filesystem:
 
