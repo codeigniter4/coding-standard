@@ -57,8 +57,8 @@ script:
   # - Verify it's installed.
   - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs -i; fi
   # - Run unit tests for CodeIgniter4 standard.
-  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpunit --debug --coverage-clover=../../../CodeIgniter4/build/logs/clover.xml --filter CodeIgniter4 ./tests/AllTests.php; fi
+  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpunit --debug --coverage-clover=../../../build/logs/clover.xml --filter CodeIgniter4 ./tests/AllTests.php; fi
 
 after_success:
-  - if [[ "$SNIFF" == "1" ]]; then cd ../../../CodeIgniter4/; fi
+  - if [[ "$SNIFF" == "1" ]]; then cd ../../../; fi
   - if [[ "$SNIFF" == "1" ]]; then php ./vendor/bin/coveralls -v -x ./build/logs/clover.xml; fi
