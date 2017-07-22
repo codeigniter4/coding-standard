@@ -15,17 +15,17 @@ matrix:
 
     include:
         # aliased to a recent 5.4.x version
-        - php: '5.4'
+        # - php: '5.4'
         # aliased to a recent 5.5.x version
-        - php: '5.5'
+        # - php: '5.5'
         # aliased to a recent 5.6.x version
-        - php: '5.6'
-          env: SNIFF=1
+        # - php: '5.6'
+          # env: SNIFF=1
         # aliased to a recent 7.x version
-        - php: '7.0'
+        # - php: '7.0'
         # aliased to a recent 7.x version
         - php: '7.1'
-          # env: SNIFF=1
+          env: SNIFF=1
         # aliased to a recent hhvm version
         - php: 'hhvm'
         # php nightly
@@ -39,6 +39,7 @@ before_install:
   # Install CodeIgniter4-Standard deps.
   - if [[ "$SNIFF" == "1" ]]; then composer self-update; fi
   - if [[ "$SNIFF" == "1" ]]; then composer require squizlabs/php_codesniffer:dev-master; fi
+  - if [[ "$SNIFF" == "1" ]]; then composer require satooshi/php-coveralls:dev-master; fi
   - if [[ "$SNIFF" == "1" ]]; then composer install; fi
   - phpenv rehash
 
@@ -56,4 +57,8 @@ script:
   # - Verify it's installed.
   - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs -i; fi
   # - Run unit tests for CodeIgniter4 standard.
-  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpunit --debug --coverage-clover=clover.xml --filter CodeIgniter4 ./tests/AllTests.php; fi
+  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpunit --debug --coverage-clover=../../../CodeIgniter4/build/logs/clover.xml --filter CodeIgniter4 ./tests/AllTests.php; fi
+
+after_success:
+  - if [[ "$SNIFF" == "1" ]]; then cd ../../../CodeIgniter4/; fi
+  - if [[ "$SNIFF" == "1" ]]; then php ./vendor/bin/coveralls -v -x ./build/logs/clover.xml; fi
