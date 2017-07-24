@@ -53,4 +53,13 @@ class MyClass {
 	( 'a', 'b' );
 
 	$a = array /* comment */ ( 'a', 'b' );
+
+	protected static $statusCodes = [
+		// 1xx: Informational
+		100	 => 'Continue',
+		101	 => 'Switching Protocols',
+		102	 => 'Processing', // http://www.iana.org/go/rfc2518
+		// 2xx: Success
+		200	 => 'OK',
+	];
 }
