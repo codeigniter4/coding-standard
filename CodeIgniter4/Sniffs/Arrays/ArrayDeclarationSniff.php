@@ -301,6 +301,8 @@ class ArrayDeclarationSniff implements Sniff
      * @param int                         $stackPtr  The position of the current token
      *                                               in the stack passed in $tokens.
      *
+     * @todo This is 'brute force' at the moment and ought to be refactored.
+     *
      * @return int|false
      */
     public function arrayDeclaredAt($phpcsFile, $stackPtr)
@@ -319,6 +321,7 @@ class ArrayDeclarationSniff implements Sniff
                       T_ARRAY_CAST  => true,
                       T_UNSET_CAST  => true,
                       T_OBJECT_CAST => true,
+                      T_STATIC      => true,
                      );
 
         $before1 = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
@@ -332,12 +335,21 @@ class ArrayDeclarationSniff implements Sniff
             // Does it have visibility scope or a type hint?
             // - 'private $arr = [];'
             // - '(array) $arr = [];'.
+            // - 'private static $arr = [];'.
             $before2 = $phpcsFile->findPrevious(T_WHITESPACE, ($before1 - 1), null, true);
             if ($before2 !== false && isset($preTokens[$tokens[$before2]['code']]) === true) {
                 // It is preceded with scope or type.
                 $indentStart = $before2;
+
+                // Could still need to go back one level if it's static.
+                // - 'private static $arr = [];'.
+                $before3 = $phpcsFile->findPrevious(T_WHITESPACE, ($before2 - 1), null, true);
+                if ($before3 !== false && isset($preTokens[$tokens[$before3]['code']]) === true) {
+                    // It is preceded with scope or type.
+                    $indentStart = $before3;
+                }
             }
-        }
+        }//end if
 
         // Is it a string?, if so expect object or constant.
         // - '$obj->arr = [];'.
@@ -345,6 +357,7 @@ class ArrayDeclarationSniff implements Sniff
         // - 'const MY_CONST = [];.
         if ($tokens[$before1]['code'] === T_STRING) {
             $before2 = $phpcsFile->findPrevious(T_WHITESPACE, ($before1 - 1), null, true);
+
             // Is it a constant?
             if ($tokens[$before2]['code'] === T_CONST) {
                 $indentStart = $before2;
