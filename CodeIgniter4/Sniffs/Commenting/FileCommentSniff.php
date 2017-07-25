@@ -151,6 +151,21 @@ class FileCommentSniff implements Sniff
         // Check each tag.
         $this->processTags($phpcsFile, $stackPtr, $commentStart);
 
+        // Check there is 1 empty line after.
+        $commentCloser  = $tokens[$commentStart]['comment_closer'];
+        $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($commentCloser + 1), null, true);
+        $lineDiff       = ($tokens[$nextContentPtr]['line'] - $tokens[$commentCloser]['line']);
+        if ($lineDiff === 1) {
+            $data  = array(1);
+            $error = 'Expected %s empty line after file doc comment';
+            $fix   = $phpcsFile->addFixableError($error, ($commentCloser + 1), 'NoEmptyLineAfterFileDocComment', $data);
+            if ($fix === true) {
+                $phpcsFile->fixer->beginChangeset();
+                $phpcsFile->fixer->addNewlineBefore($nextContentPtr);
+                $phpcsFile->fixer->endChangeset();
+            }
+        }
+
         // Ignore the rest of the file.
         return ($phpcsFile->numTokens + 1);
 
