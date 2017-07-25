@@ -71,4 +71,15 @@ class MyClass {
 				'message'     => pg_last_error($this->connID)
 		];
 	}
+
+	public function error2()
+	{
+		$this->QBWhere[] = ['condition' => $like_statement, 'escape' => $escape];
+
+		$this->QBWhere[] = [
+							 'condition' => $like_statement,
+							 'escape'    => $escape,
+						 ];
+
+	}
 }

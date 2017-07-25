@@ -351,13 +351,17 @@ class ArrayDeclarationSniff implements Sniff
             }
         }//end if
 
+        // - $obj->arr[] = [];
+        if ($tokens[$before1]['code'] === T_CLOSE_SQUARE_BRACKET) {
+            $before1 = $phpcsFile->findPrevious(T_WHITESPACE, ($tokens[$before1]['bracket_opener'] - 1), null, true);
+        }
+
         // Is it a string?, if so expect object or constant.
         // - '$obj->arr = [];'.
         // - 'MY_CONST = [];'
         // - 'const MY_CONST = [];.
         if ($tokens[$before1]['code'] === T_STRING) {
             $before2 = $phpcsFile->findPrevious(T_WHITESPACE, ($before1 - 1), null, true);
-
             // Is it a constant?
             if ($tokens[$before2]['code'] === T_CONST) {
                 $indentStart = $before2;
