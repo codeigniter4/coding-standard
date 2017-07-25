@@ -80,6 +80,5 @@ class MyClass {
 							 'condition' => $like_statement,
 							 'escape'    => $escape,
 						 ];
-
 	}
 }
