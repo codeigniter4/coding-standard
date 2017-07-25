@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3ca271f823b274ef0991a15cd0379f31",
+    "content-hash": "5f7ee0f8cc3394d513b2c528393ae58f",
     "packages": [],
     "packages-dev": [
         {
@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/squizlabs/PHP_CodeSniffer.git",
-                "reference": "ef1b2d69429fce116b90983ef7253e5438beb7bb"
+                "reference": "e5504944757cfbbcbff761674f3b5c720a95a752"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/ef1b2d69429fce116b90983ef7253e5438beb7bb",
-                "reference": "ef1b2d69429fce116b90983ef7253e5438beb7bb",
+                "url": "https://api.github.com/repos/squizlabs/PHP_CodeSniffer/zipball/e5504944757cfbbcbff761674f3b5c720a95a752",
+                "reference": "e5504944757cfbbcbff761674f3b5c720a95a752",
                 "shasum": ""
             },
             "require": {
@@ -56,7 +56,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-07-20T01:08:16+00:00"
+            "time": "2017-07-24T23:06:42+00:00"
         }
     ],
     "aliases": [],

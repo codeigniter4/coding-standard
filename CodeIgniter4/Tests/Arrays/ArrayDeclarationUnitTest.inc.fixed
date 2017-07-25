@@ -1,4 +1,5 @@
 <?php
+
 class MyClass {
 
 	protected $codes = [
@@ -117,4 +118,46 @@ class MyClass {
         'a',
         'b', 
     );
+
+	protected static $statusCodes = [
+		// 1xx: Informational
+		100 => 'Continue',
+		101 => 'Switching Protocols',
+		102 => 'Processing', // http://www.iana.org/go/rfc2518
+		// 2xx: Success
+		200 => 'OK',
+	];
+
+	public function error()
+	{
+		return [
+            'code'    => '',
+            'message' => pg_last_error($this->connID),
+		];
+	}
+
+	public function error2()
+	{
+		$this->QBWhere[] = [
+            'condition' => $like_statement,
+            'escape'    => $escape,
+        ];
+
+		$this->QBWhere[] = [
+            'condition' => $like_statement,
+            'escape'    => $escape,
+        ];
+	}
+
+	public $arr = array();
+
+	public $arr = [];
+
+	public $arr = [1];
+
+	public $arr = [
+		'a' => 1,
+		'b' => 2,
+		'c' => 3,
+	];
 }

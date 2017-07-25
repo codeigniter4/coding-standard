@@ -1,6 +1,6 @@
 <?php
 /**
- * Array Declaration Unit Test
+ * Allman Control Signature Unit Test
  *
  * @package   CodeIgniter4-Standard
  * @author    Louis Linehan <louis.linehan@gmail.com>
@@ -8,11 +8,11 @@
  * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
  */
 
-namespace CodeIgniter4\Tests\Arrays;
+namespace CodeIgniter4\Tests\ControlStructures;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class ArrayDeclarationUnitTest extends AbstractSniffUnitTest
+class AllmanControlSignatureUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -42,46 +42,54 @@ class ArrayDeclarationUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return array(
-                6  => 1,
-                7  => 1,
-                8  => 1,
-                9  => 1,
-                10 => 1,
-                11 => 1,
-                12 => 1,
-                13 => 1,
-                14 => 2,
-                15 => 1,
-                16 => 1,
-                22 => 1,
-                29 => 1,
-                30 => 1,
-                36 => 1,
-                37 => 2,
-                42 => 2,
-                43 => 2,
-                44 => 2,
-                45 => 2,
-                47 => 2,
-                48 => 2,
-                49 => 2,
-                52 => 1,
-                56 => 1,
-                60 => 1,
-                61 => 1,
-                62 => 1,
-                64 => 1,
-                70 => 1,
-                71 => 1,
-                77 => 1,
-                80 => 1,
-                81 => 1,
-                82 => 1,
-                85 => 1,
-                87 => 1,
-                89 => 1,
-                92 => 1,
-                93 => 1,
+                3   => 1,
+                5   => 1,
+                10  => 1,
+                18  => 4,
+                20  => 1,
+                22  => 1,
+                24  => 1,
+                28  => 2,
+                32  => 3,
+                34  => 1,
+                38  => 2,
+                42  => 3,
+                44  => 1,
+                48  => 2,
+                52  => 3,
+                54  => 1,
+                56  => 2,
+                60  => 1,
+                62  => 2,
+                66  => 7,
+                68  => 1,
+                70  => 2,
+                74  => 1,
+                76  => 3,
+                80  => 7,
+                82  => 2,
+                86  => 2,
+                90  => 2,
+                95  => 1,
+                99  => 1,
+                102 => 1,
+                104 => 2,
+                108 => 5,
+                112 => 2,
+                113 => 1,
+                115 => 2,
+                120 => 2,
+                122 => 1,
+                123 => 1,
+                126 => 1,
+                130 => 2,
+                148 => 1,
+                151 => 1,
+                154 => 1,
+                175 => 1,
+                185 => 2,
+                206 => 1,
+                208 => 2,
                );
 
     }//end getErrorList()
