@@ -7,6 +7,7 @@
  * @copyright 2017 Louis Linehan
  * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
  */
+
 namespace CodeIgniter4\Sniffs\WhiteSpace;
 
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -15,7 +16,8 @@ use PHP_CodeSniffer\Files\File;
 /**
  * Function Closing Brace Space Sniff
  *
- * Checks that there is one empty line before the closing brace of a function.
+ * Checks that there is [allowedLines|allowedNestedLines] empty lines before the
+ * closing brace of a function.
  *
  * @author Louis Linehan <louis.linehan@gmail.com>
  */

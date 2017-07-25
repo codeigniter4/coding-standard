@@ -1,6 +1,6 @@
 <?php
 /**
- * Boolean Not Space After Unit Test
+ * Vertical Empty Lines Unit Test
  *
  * @package   CodeIgniter4-Standard
  * @author    Louis Linehan <louis.linehan@gmail.com>
@@ -12,7 +12,7 @@ namespace CodeIgniter4\Tests\WhiteSpace;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class BooleanNotSpaceAfterUnitTest extends AbstractSniffUnitTest
+class VerticalEmptyLinesUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -27,8 +27,17 @@ class BooleanNotSpaceAfterUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return array(
-                3 => 1,
-                4 => 0,
+                13 => 1,
+                19 => 1,
+                23 => 1,
+                24 => 1,
+                30 => 1,
+                38 => 1,
+                41 => 1,
+                44 => 1,
+                45 => 1,
+                46 => 1,
+                47 => 1,
                );
 
     }//end getErrorList()
