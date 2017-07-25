@@ -135,6 +135,10 @@
     -->
     <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
     <!--
+    Checks for more than one consecutive empty line.
+    -->
+    <rule ref="CodeIgniter4.WhiteSpace.VerticalEmptyLines"/>
+    <!--
     There should be one class per file, execept for cases where
     breaking this rule makes more sense.
     'Exception.php',
@@ -229,25 +233,13 @@
         </properties>
     </rule>
     <!--
-    <rule ref="Squiz.WhiteSpace.FunctionSpacing">                     
-        <properties>
-            <property name="spacing" value="1" />
-        </properties>
-    </rule>
-    @todo Clash here with function scopes using if (function_exists.
-    -->
-    <!--
     Checks there are no blank lines after a function opening brace.
     -->
     <rule ref="Squiz.WhiteSpace.FunctionOpeningBraceSpace"/>
     <!--
     Checks there are no blank lines before a function closing brace.
     -->
-    <rule ref="CodeIgniter4.WhiteSpace.FunctionClosingBraceSpace">
-        <properties>
-            <property name="allowedLines" value="0" />
-        </properties>
-    </rule>
+    <rule ref="CodeIgniter4.WhiteSpace.FunctionClosingBraceSpace"/>
     <!--
     Checks for each declarations are styled properly.
     -->
