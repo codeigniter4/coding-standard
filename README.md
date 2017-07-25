@@ -2,7 +2,7 @@
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.0-beta0008
+Version 1.0.0-beta0009
 
 | Master | Develop |
 | :---: | :---: |
@@ -34,23 +34,65 @@ Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin c
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0008.zip).
+Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0009.zip).
 
 Set `standard ` paths to your local filesystem:
 
 `'/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
+### Global install
+
+Globally [install PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer/blob/master/README.md) with one of the various methods.
+
+Once complete you should be able to execute `phpcs -i` on the command line.
+
+You should see something like:-
+
+`The installed coding standards are MySource, PEAR, PSR1, PSR2, Squiz and Zend.`
+
+Either clone this repository...
+
+`git clone -b master --depth 1 https://github.com/louisl/CodeIgniter4-Standard.git`.
+
+or use composer...
+
+`composer global require louisl/codeigniter4-standard`
+
+or download.
+
+Take note of the paths where they were installed.
+
+Create a symbolic link to the `CodeIgniter4-Standard/CodeIgniter4` directory in `php_codesniffer/src/Standards/` eg.
+
+`ln -s ~/Documents/Projects/CodeIgniter4-Standard/CodeIgniter4 ~/.composer/vendor/squizlabs/php_codesniffer/src/Standards/CodeIgniter4`
+
+or copy the `CodeIgniter4-Standard/CodeIgniter4` directory to `php_codesniffer/src/Standards/`
+
+Executing `phpcs -i` should now show CodeIgniter4 installed eg.
+
+`The installed coding standards are CodeIgniter4, MySource, PEAR, PSR1, PSR2, Squiz and Zend.`
+
+You should now be able to set 'CodeIgniter4' as the phpcs standard in the plugin/editor/IDE of your choice.
+
 ### Command line use
 
 #### Sniffing errors & warnings (reporting).
 
-Single file.
+Single file...
 
 `phpcs /Path/To/MyFile.php --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
+
+or if globally installed.
+
+`phpcs /Path/To/MyFile.php --standard=CodeIgniter4`
 
 Directory (recursive).
 
 `phpcs /Path/To/MyProject --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
+
+or if globally installed.
+
+`phpcs /Path/To/MyProject --standard=CodeIgniter4`
 
 #### Fixing fixable errors.
 
@@ -58,9 +100,17 @@ Single file.
 
 `phpcbf /Path/To/MyFile.php --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
 
+or if globally installed.
+
+`phpcbf /Path/To/MyFile.php --standard=CodeIgniter4`
+
 Directory (recursive).
 
 `phpcbf /Path/To/MyProject --standard='/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml'`
+
+or if globally installed.
+
+`phpcbf /Path/To/MyProject --standard=CodeIgniter4`
 
 ## Example editor configs
 
