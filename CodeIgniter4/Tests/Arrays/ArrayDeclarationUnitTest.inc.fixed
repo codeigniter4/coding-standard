@@ -148,4 +148,16 @@ class MyClass {
             'escape'    => $escape,
         ];
 	}
+
+	public $arr = array();
+
+	public $arr = [];
+
+	public $arr = [1];
+
+	public $arr = [
+		'a' => 1,
+		'b' => 2,
+		'b' => 2,
+	];
 }
