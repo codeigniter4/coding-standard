@@ -63,4 +63,12 @@ class MyClass {
 		// 2xx: Success
 		200	 => 'OK',
 	];
+
+	public function error()
+	{
+		return [
+				'code'         => '',
+				'message'     => pg_last_error($this->connID)
+		];
+	}
 }

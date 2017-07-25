@@ -406,8 +406,9 @@ class ArrayDeclarationSniff implements Sniff
         $prevNonWhitespaceToken = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
         if ($tokens[$prevNonWhitespaceToken]['code'] === T_EQUAL
             || $tokens[$prevNonWhitespaceToken]['code'] === T_OPEN_PARENTHESIS
+            || $tokens[$prevNonWhitespaceToken]['code'] === T_RETURN
         ) {
-            // It's "=" or "(".
+            // It's "=", "(" or "return".
             $indentStart = $this->arrayDeclaredAt($phpcsFile, $prevNonWhitespaceToken);
         } else if ($tokens[$prevNonWhitespaceToken]['code'] === T_DOUBLE_ARROW) {
             // It's an array in an array "=> []".

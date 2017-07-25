@@ -71,6 +71,8 @@ class ArrayDeclarationUnitTest extends AbstractSniffUnitTest
                 61 => 1,
                 62 => 1,
                 64 => 1,
+                70 => 1,
+                71 => 1,
                );
 
     }//end getErrorList()
