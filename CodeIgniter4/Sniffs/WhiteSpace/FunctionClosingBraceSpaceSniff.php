@@ -157,10 +157,6 @@ class FunctionClosingBraceSpaceSniff implements Sniff
             }//end if
         } else {
             if ($found !== (int) $this->allowedLines) {
-                if ($found < 0) {
-                    $found = 0;
-                }
-
                 if ($this->allowedLines === 1) {
                     $plural = '';
                 } else {
@@ -176,21 +172,16 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                 $fix   = $phpcsFile->addFixableError($error, $closeBrace, 'SpacingBeforeClose', $data);
 
                 if ($fix === true) {
-                    if ($found > 1) {
+                    if ($found > $this->allowedLines) {
                         $phpcsFile->fixer->beginChangeset();
-                        for ($i = ($prevContent + 1); $i < ($closeBrace - 1); $i++) {
+                        for ($i = ($prevContent + 1); $i < ($closeBrace); $i++) {
                             $phpcsFile->fixer->replaceToken($i, '');
                         }
 
-                        $phpcsFile->fixer->replaceToken($i, $phpcsFile->eolChar);
+                        $phpcsFile->fixer->replaceToken(($closeBrace - 1), $phpcsFile->eolChar);
                         $phpcsFile->fixer->endChangeset();
                     } else {
-                        // Try to maintain indentation.
-                        if ($tokens[($closeBrace - 1)]['code'] === T_WHITESPACE) {
-                            $phpcsFile->fixer->addNewlineBefore($closeBrace - 1);
-                        } else {
-                            $phpcsFile->fixer->addNewlineBefore($closeBrace);
-                        }
+                        $phpcsFile->fixer->addNewlineBefore($closeBrace);
                     }
                 }
             }//end if
