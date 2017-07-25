@@ -1,10 +1,11 @@
 <?php
 /**
- * Unit test class for the ArrayDeclarationTest sniff.
+ * Array Declaration Unit Test
  *
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @package   CodeIgniter4-Standard
+ * @author    Louis Linehan <louis.linehan@gmail.com>
+ * @copyright 2017 Louis Linehan
+ * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
  */
 
 namespace CodeIgniter4\Tests\Arrays;
@@ -41,7 +42,6 @@ class ArrayDeclarationUnitTest extends AbstractSniffUnitTest
     public function getErrorList()
     {
         return array(
-                5  => 1,
                 6  => 1,
                 7  => 1,
                 8  => 1,
@@ -49,27 +49,28 @@ class ArrayDeclarationUnitTest extends AbstractSniffUnitTest
                 10 => 1,
                 11 => 1,
                 12 => 1,
-                13 => 2,
-                14 => 1,
+                13 => 1,
+                14 => 2,
                 15 => 1,
-                21 => 1,
-                28 => 1,
+                16 => 1,
+                22 => 1,
                 29 => 1,
-                35 => 1,
-                36 => 2,
-                41 => 2,
+                30 => 1,
+                36 => 1,
+                37 => 2,
                 42 => 2,
                 43 => 2,
                 44 => 2,
-                46 => 2,
+                45 => 2,
                 47 => 2,
                 48 => 2,
-                51 => 1,
-                55 => 1,
-                59 => 1,
+                49 => 2,
+                52 => 1,
+                56 => 1,
                 60 => 1,
                 61 => 1,
-                63 => 1,
+                62 => 1,
+                64 => 1,
                );
 
     }//end getErrorList()

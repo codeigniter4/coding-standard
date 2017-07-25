@@ -1,10 +1,11 @@
 <?php
 /**
- * Unit test class for the ValidMethodNameUnitTest sniff.
+ * Disallow Tabs In Alignment Unit Test
  *
- * @author    Greg Sherwood <gsherwood@squiz.net>
- * @copyright 2006-2015 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @package   CodeIgniter4-Standard
+ * @author    Louis Linehan <louis.linehan@gmail.com>
+ * @copyright 2017 Louis Linehan
+ * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
  */
 
 namespace CodeIgniter4\Tests\WhiteSpace;
