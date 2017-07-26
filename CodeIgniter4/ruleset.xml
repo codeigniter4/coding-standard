@@ -310,16 +310,13 @@
     -->
     <rule ref="CodeIgniter4.NamingConventions.ValidFunctionName"/>
     <!--
-    Checks arrays are declared as "[]" not "array()".
-    -->
-    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
-    <!--
     Checks array bracket spaces.
     -->
     <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
     <!--
     Check array declaration, indentation, alignment and that the last item
     has a trailing comma.
+    Checks arrays are declared as "[]" not "array()".
     -->
     <rule ref="CodeIgniter4.Arrays.ArrayDeclaration"/>
     <!--

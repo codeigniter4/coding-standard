@@ -99,4 +99,17 @@ class MyClass {
 			'perPage' => $this->pager->getPerPage(),
 						 'total'   => $this->pager->getPerPage() * $this->pager->getPageCount(),
 								  ] , 15);
+
+	return preg_replace(
+				array(
+			'#<img[\s/]+.*?src\s*=\s*(["\'])([^\\1]+?)\\1.*?\>#i',
+			'#<img[\s/]+.*?src\s*=\s*?(([^\s"\'=<>`]+)).*?\>#i'
+				), '\\2', $str
+		);
+
+		$this->db->table($this->table)
+			->insert([
+'version'   => $version,
+'name'      => $this->name,
+			]);
 }

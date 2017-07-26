@@ -85,6 +85,30 @@ class ArrayDeclarationSniff implements Sniff
 
         $tokens = $phpcsFile->getTokens();
 
+        // First make sure all arrays use short array syntax, this makes fixing much easier.
+        if ($tokens[$stackPtr]['code'] === T_ARRAY) {
+            $error = 'Short array syntax must be used to define arrays';
+            $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'FoundLongArray');
+
+            if ($fix === true) {
+                $tokens = $phpcsFile->getTokens();
+                $opener = $tokens[$stackPtr]['parenthesis_opener'];
+                $closer = $tokens[$stackPtr]['parenthesis_closer'];
+
+                $phpcsFile->fixer->beginChangeset();
+
+                if ($opener === null) {
+                    $phpcsFile->fixer->replaceToken($stackPtr, '[]');
+                } else {
+                    $phpcsFile->fixer->replaceToken($stackPtr, '');
+                    $phpcsFile->fixer->replaceToken($opener, '[');
+                    $phpcsFile->fixer->replaceToken($closer, ']');
+                }
+
+                $phpcsFile->fixer->endChangeset();
+            }
+        }//end if
+
         if ($tokens[$stackPtr]['code'] === T_ARRAY) {
             $arrayStart = $tokens[$stackPtr]['parenthesis_opener'];
             if (isset($tokens[$arrayStart]['parenthesis_closer']) === false) {
@@ -328,6 +352,8 @@ class ArrayDeclarationSniff implements Sniff
                        T_OBJECT_CAST,
                        T_STATIC,
                        T_CONST,
+                       T_RETURN,
+                       T_OBJECT_OPERATOR,
                       );
 
             $firstOnLine = $phpcsFile->findFirstOnLine($starts, $prevNonWhitespaceToken);
@@ -356,6 +382,23 @@ class ArrayDeclarationSniff implements Sniff
             // it should get picked in a future pass.
             $indentStart = $stackPtr;
         }//end switch
+
+        // If this is the first argument in a function ensure the bracket to be right after the parenthesis. eg "array_combine([".
+        if ($tokens[$prevNonWhitespaceToken]['code'] === T_OPEN_PARENTHESIS && $tokens[$stackPtr]['code'] === T_OPEN_SHORT_ARRAY) {
+            if ($tokens[$stackPtr]['line'] > $tokens[$prevNonWhitespaceToken]['line']) {
+                $error = 'Array open bracket should be after function open parenthesis "(["';
+                $data  = array();
+                $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'ShortArrayOpenWrongLine', $data);
+                if ($fix === true) {
+                    $phpcsFile->fixer->beginChangeset();
+                    for ($i = ($prevNonWhitespaceToken + 1); $i < $stackPtr; $i++) {
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+
+                    $phpcsFile->fixer->endChangeset();
+                }
+            }
+        }
 
         // Check the closing bracket is on a new line.
         $lastContent = $phpcsFile->findPrevious(T_WHITESPACE, ($arrayEnd - 1), $arrayStart, true);
