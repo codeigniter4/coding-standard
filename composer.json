@@ -1,7 +1,7 @@
 {
 	"name": "louisl/codeigniter4-standard",
 	"description": "CodeIgniter 4 Standard for PHP_CodeSniffer 3.",
-	"version":"1.0.0-beta0010",
+	"version":"1.0.0-beta0011",
 	"license":"MIT",
 	"authors": [
         {
