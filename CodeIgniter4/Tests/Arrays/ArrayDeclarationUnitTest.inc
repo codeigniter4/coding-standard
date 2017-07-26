@@ -93,4 +93,10 @@ class MyClass {
 		'b'=> 2,
 		'c' => 3,
 	];
+
+	$cache->save($cacheKeyPagination, [
+									  'page'    => $this->pager->getCurrentPage(),
+			'perPage' => $this->pager->getPerPage(),
+						 'total'   => $this->pager->getPerPage() * $this->pager->getPageCount(),
+								  ] , 15);
 }

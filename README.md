@@ -2,12 +2,12 @@
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.0-beta0009
+Version 1.0.0-beta0010
 
 | Master | Develop |
 | :---: | :---: |
 | [![Build Status](https://travis-ci.org/louisl/CodeIgniter4-Standard.svg?branch=master)](https://travis-ci.org/louisl/CodeIgniter4-Standard) | [![Build Status](https://travis-ci.org/louisl/CodeIgniter4-Standard.svg?branch=develop)](https://travis-ci.org/louisl/CodeIgniter4-Standard) |
-| [![Coverage Status](https://coveralls.io/repos/github/louisl/CodeIgniter4-Standard/badge.svg?branch=master)](https://coveralls.io/github/louisl/CodeIgniter4-Standard?branch=master) | [![Coverage Status](https://coveralls.io/repos/github/louisl/CodeIgniter4-Standard/badge.svg?branch=develop)](https://coveralls.io/github/louisl/CodeIgniter4-Standard?branch=develop)
+| [![Coverage Status](https://coveralls.io/repos/github/louisl/CodeIgniter4-Standard/badge.svg?branch=master)](https://coveralls.io/github/louisl/CodeIgniter4-Standard?branch=master) | [![Coverage Status](https://coveralls.io/repos/github/louisl/CodeIgniter4-Standard/badge.svg?branch=develop)](https://coveralls.io/github/louisl/CodeIgniter4-Standard?branch=develop) |
 
 ***This is currently a work in progress.***
 
@@ -34,7 +34,7 @@ Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin c
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0009.zip).
+Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0010.zip).
 
 Set `standard ` paths to your local filesystem:
 
