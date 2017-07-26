@@ -295,103 +295,6 @@ class ArrayDeclarationSniff implements Sniff
 
 
     /**
-     * Get the stackPtr where the array declaration starts.
-     *
-     * @param \PHP_CodeSniffer\Files\File $phpcsFile The current file being checked.
-     * @param int                         $stackPtr  The position of the current token
-     *                                               in the stack passed in $tokens.
-     *
-     * @todo This is 'brute force' at the moment and ought to be refactored.
-     *
-     * @return int|false
-     */
-    public function arrayDeclaredAt($phpcsFile, $stackPtr)
-    {
-        $tokens = $phpcsFile->getTokens();
-
-        // Possible indent starting token.
-        $indentStart = $stackPtr;
-
-         // Tokens that could come before an array declaration variable.
-        $preTokens = array(
-                      T_VAR         => true,
-                      T_PUBLIC      => true,
-                      T_PRIVATE     => true,
-                      T_PROTECTED   => true,
-                      T_ARRAY_CAST  => true,
-                      T_UNSET_CAST  => true,
-                      T_OBJECT_CAST => true,
-                      T_STATIC      => true,
-                     );
-
-        $before1 = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
-
-        // Is it a variable.
-        // - '$arr = [];'.
-        if ($tokens[$before1]['code'] === T_VARIABLE) {
-            // Store this in case this is the start.
-            $indentStart = $before1;
-
-            // Does it have visibility scope or a type hint?
-            // - 'private $arr = [];'
-            // - '(array) $arr = [];'.
-            // - 'private static $arr = [];'.
-            $before2 = $phpcsFile->findPrevious(T_WHITESPACE, ($before1 - 1), null, true);
-            if ($before2 !== false && isset($preTokens[$tokens[$before2]['code']]) === true) {
-                // It is preceded with scope or type.
-                $indentStart = $before2;
-
-                // Could still need to go back one level if it's static.
-                // - 'private static $arr = [];'.
-                $before3 = $phpcsFile->findPrevious(T_WHITESPACE, ($before2 - 1), null, true);
-                if ($before3 !== false && isset($preTokens[$tokens[$before3]['code']]) === true) {
-                    // It is preceded with scope or type.
-                    $indentStart = $before3;
-                }
-            }
-        }//end if
-
-        // - $obj->arr[] = [];
-        if ($tokens[$before1]['code'] === T_CLOSE_SQUARE_BRACKET) {
-            $before1 = $phpcsFile->findPrevious(T_WHITESPACE, ($tokens[$before1]['bracket_opener'] - 1), null, true);
-        }
-
-        // Is it a string?, if so expect object or constant.
-        // - '$obj->arr = [];'.
-        // - 'MY_CONST = [];'
-        // - 'const MY_CONST = [];.
-        if ($tokens[$before1]['code'] === T_STRING) {
-            $before2 = $phpcsFile->findPrevious(T_WHITESPACE, ($before1 - 1), null, true);
-            // Is it a constant?
-            if ($tokens[$before2]['code'] === T_CONST) {
-                $indentStart = $before2;
-                return $indentStart;
-            }
-
-            // Is it an object?
-            if ($tokens[$before2]['code'] === T_OBJECT_OPERATOR) {
-                $indentStart = $before2;
-
-                $before3 = $phpcsFile->findPrevious(T_WHITESPACE, ($before2 - 1), null, true);
-                if ($tokens[$before3]['code'] === T_VARIABLE) {
-                    $indentStart = $before3;
-
-                    // Does it have visibility scope or a is it cast?
-                    $before4 = $phpcsFile->findPrevious(T_WHITESPACE, ($before3 - 1), null, true);
-                    if ($before4 !== false && isset($preTokens[$tokens[$before4]['code']]) === true) {
-                        // It is preceded with scope or type.
-                        $indentStart = $before4;
-                    }
-                }
-            }
-        }//end if
-
-        return $indentStart;
-
-    }//end arrayDeclaredAt()
-
-
-    /**
      * Processes a multi-line array definition.
      *
      * @param \PHP_CodeSniffer\Files\File $phpcsFile  The current file being checked.
@@ -408,25 +311,51 @@ class ArrayDeclarationSniff implements Sniff
         $keywordStart = $tokens[$stackPtr]['column'];
 
         $prevNonWhitespaceToken = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
-        if ($tokens[$prevNonWhitespaceToken]['code'] === T_EQUAL
-            || $tokens[$prevNonWhitespaceToken]['code'] === T_OPEN_PARENTHESIS
-            || $tokens[$prevNonWhitespaceToken]['code'] === T_RETURN
-        ) {
+
+        // Find where this array should be indented from.
+        switch ($tokens[$prevNonWhitespaceToken]['code']) {
+        case T_EQUAL:
+        case T_OPEN_PARENTHESIS:
             // It's "=", "(" or "return".
-            $indentStart = $this->arrayDeclaredAt($phpcsFile, $prevNonWhitespaceToken);
-        } else if ($tokens[$prevNonWhitespaceToken]['code'] === T_DOUBLE_ARROW) {
+            $starts = array(
+                       T_VARIABLE,
+                       T_VAR,
+                       T_PUBLIC,
+                       T_PRIVATE,
+                       T_PROTECTED,
+                       T_ARRAY_CAST,
+                       T_UNSET_CAST,
+                       T_OBJECT_CAST,
+                       T_STATIC,
+                       T_CONST,
+                      );
+
+            $firstOnLine = $phpcsFile->findFirstOnLine($starts, $prevNonWhitespaceToken);
+            $indentStart = $firstOnLine;
+            break;
+        case T_DOUBLE_ARROW:
             // It's an array in an array "=> []".
             $indentStart = $phpcsFile->findPrevious(T_WHITESPACE, ($prevNonWhitespaceToken - 1), null, true);
-        } else if ($tokens[$prevNonWhitespaceToken]['code'] === T_OPEN_SHORT_ARRAY
-            || $tokens[$prevNonWhitespaceToken]['code'] === T_COMMA
-        ) {
+            break;
+        case T_RETURN:
+            $indentStart = $prevNonWhitespaceToken;
+            break;
+        case T_COMMENT:
+        case T_OPEN_SHORT_ARRAY:
             // It's an array in an array "[[]]" or the end of an array line "[],".
             $indentStart = $stackPtr;
-        } else {
-            // Nothing expected preceded this so return here and
+            break;
+        case T_COMMA:
+            // The end of an array line "[],".
+            // Argument in a function "$item->save($data, [...], ...)".
+            $firstOnLine = $phpcsFile->findFirstOnLine(array(T_VARIABLE, T_CLOSE_SHORT_ARRAY), $prevNonWhitespaceToken);
+            $indentStart = $firstOnLine;
+            break;
+        default:
+            // Nothing expected preceded this so leave ptr where it is and
             // it should get picked in a future pass.
-            return;
-        }
+            $indentStart = $stackPtr;
+        }//end switch
 
         // Check the closing bracket is on a new line.
         $lastContent = $phpcsFile->findPrevious(T_WHITESPACE, ($arrayEnd - 1), $arrayStart, true);
