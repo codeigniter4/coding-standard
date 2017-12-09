@@ -1,18 +1,22 @@
-# Travis CI (MIT License) configuration file
-# @link https://travis-ci.org/
+# Travis CI
 
 # Use new container based environment
 sudo: false
 
 # Declare project language.
-# @link http://about.travis-ci.org/docs/user/languages/php/
 language: php
 
-# Declare versions of PHP to use. Use one decimal max.
-# @link http://docs.travis-ci.com/user/build-configuration/
+env:
+  global:
+  # Name and folder of the the standard to test.
+  - STANDARD="CodeIgniter4"
+  # Upload covarage to coveralls.
+  - COVERALLS="1"
+
 matrix:
     fast_finish: true
 
+    # Declare versions of PHP to use. Use one decimal max.
     include:
         # aliased to a recent 5.4.x version
         # - php: '5.4'
@@ -20,45 +24,44 @@ matrix:
         # - php: '5.5'
         # aliased to a recent 5.6.x version
         # - php: '5.6'
-          # env: SNIFF=1
         # aliased to a recent 7.x version
         # - php: '7.0'
         # aliased to a recent 7.x version
         - php: '7.1'
-          env: SNIFF=1
         # aliased to a recent hhvm version
-        - php: 'hhvm'
+        # - php: 'hhvm'
         # php nightly
-        - php: 'nightly'
+        # - php: 'nightly'
 
-    allow_failures:
-        - php: 'hhvm'
-        - php: nightly
+    # allow_failures:
+        # - php: 'hhvm'
+        # - php: 'nightly'
 
 before_install:
-  # Install CodeIgniter4-Standard deps.
-  - if [[ "$SNIFF" == "1" ]]; then composer self-update; fi
-  - if [[ "$SNIFF" == "1" ]]; then composer require squizlabs/php_codesniffer:dev-master; fi
-  - if [[ "$SNIFF" == "1" ]]; then composer require satooshi/php-coveralls:dev-master; fi
-  - if [[ "$SNIFF" == "1" ]]; then composer install; fi
-  - phpenv rehash
+  # Remove xdebug. Needed for coverage.
+  # - phpenv config-rm xdebug.ini
+
+install:
+  # Update composer to latest version.
+  - composer self-update
+  # Install project composer deps in composer.json
+  - composer install --no-interaction
+
+before_script:
+  # Rehash the php environment if testing on several PHP versions.
+  # - phpenv rehash
 
 script:
-  # Search for PHP syntax errors.
-  - if [[ "$SNIFF" == "1" ]]; then find -L . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l; fi
-  # Change dir.
-  - if [[ "$SNIFF" == "1" ]]; then cd ./vendor/squizlabs/php_codesniffer/; fi
-  # Install php_codesniffer deps.
-  - if [[ "$SNIFF" == "1" ]]; then composer install; fi
+  # Check for PHP syntax errors.
+  - find -L . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
   # - Check files match the PHPCS standard.
-  - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs --ignore=*/Tests/* ../../../CodeIgniter4; fi
-  # - Change the default standard.
-  - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs --config-set installed_paths ../../../CodeIgniter4; fi
-  # - Verify it's installed.
-  - if [[ "$SNIFF" == "1" ]]; then ./bin/phpcs -i; fi
-  # - Run unit tests for CodeIgniter4 standard.
-  - if [[ "$SNIFF" == "1" ]]; then ./vendor/bin/phpunit --debug --coverage-clover=../../../build/logs/clover.xml --filter CodeIgniter4 ./tests/AllTests.php; fi
+  - ./vendor/bin/phpcs --ignore=*/Tests/* ./$STANDARD/ --standard=./vendor/squizlabs/php_codesniffer/phpcs.xml.dist
+  # Change the default standard.
+  - ./vendor/bin/phpcs --config-set installed_paths $TRAVIS_BUILD_DIR/$STANDARD
+  # Verify it's installed.
+  - ./vendor/bin/phpcs -i
+  # Run unit tests for the standard.
+  - ./vendor/bin/phpunit --debug --filter $STANDARD
 
 after_success:
-  - if [[ "$SNIFF" == "1" ]]; then cd ../../../; fi
-  - if [[ "$SNIFF" == "1" ]]; then php ./vendor/bin/coveralls -v -x ./build/logs/clover.xml; fi
+  - if [[ "$COVERALLS" == "1" ]]; then ./vendor/bin/coveralls -v -x ./build/logs/coverage/clover/clover.xml; fi

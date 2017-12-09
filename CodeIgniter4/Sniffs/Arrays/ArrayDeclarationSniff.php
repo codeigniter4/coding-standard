@@ -374,7 +374,24 @@ class ArrayDeclarationSniff implements Sniff
         case T_COMMA:
             // The end of an array line "[],".
             // Argument in a function "$item->save($data, [...], ...)".
-            $firstOnLine = $phpcsFile->findFirstOnLine(array(T_VARIABLE, T_CLOSE_SHORT_ARRAY), $prevNonWhitespaceToken);
+            $starts = array(
+                       T_VARIABLE,
+                       T_VAR,
+                       T_PUBLIC,
+                       T_PRIVATE,
+                       T_PROTECTED,
+                       T_ARRAY_CAST,
+                       T_UNSET_CAST,
+                       T_OBJECT_CAST,
+                       T_STATIC,
+                       T_CONST,
+                       T_RETURN,
+                       T_OBJECT_OPERATOR,
+                       T_CLOSE_SHORT_ARRAY,
+                       T_CONSTANT_ENCAPSED_STRING,
+                      );
+
+            $firstOnLine = $phpcsFile->findFirstOnLine($starts, $prevNonWhitespaceToken);
             $indentStart = $firstOnLine;
             break;
         default:
@@ -591,6 +608,10 @@ class ArrayDeclarationSniff implements Sniff
                     $arrayEnd,
                     true
                 );
+
+                if ($nextContent === false) {
+                    break;
+                }
 
                 $currentEntry['value'] = $nextContent;
                 $indices[] = $currentEntry;
