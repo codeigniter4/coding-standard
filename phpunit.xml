@@ -1,0 +1,16 @@
+<phpunit beStrictAboutTestsThatDoNotTestAnything="false" bootstrap="./vendor/squizlabs/php_codesniffer/tests/bootstrap.php">
+    <testsuites>
+        <testsuite name="Test Suite">
+            <file>./vendor/squizlabs/php_codesniffer/tests/AllTests.php</file>
+        </testsuite>
+    </testsuites>
+    <logging>
+        <log type="coverage-clover" target="./build/logs/coverage/clover/clover.xml"/>
+        <log type="coverage-html" target="./build/logs/coverage/html/"/>
+    </logging>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">./CodeIgniter4</directory>
+        </whitelist>
+    </filter>
+</phpunit>
