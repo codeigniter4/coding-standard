@@ -28,8 +28,9 @@ class BooleanOrUnitTest extends AbstractSniffUnitTest
     {
         return array(
                 3 => 1,
-                4 => 0,
-                5 => 2,
+                4 => 1,
+                5 => 1,
+                6 => 2,
                );
 
     }//end getErrorList()
