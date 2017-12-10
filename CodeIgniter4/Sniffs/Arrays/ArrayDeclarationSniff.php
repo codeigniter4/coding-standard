@@ -403,7 +403,7 @@ class ArrayDeclarationSniff implements Sniff
         // If this is the first argument in a function ensure the bracket to be right after the parenthesis. eg "array_combine([".
         if ($tokens[$prevNonWhitespaceToken]['code'] === T_OPEN_PARENTHESIS && $tokens[$stackPtr]['code'] === T_OPEN_SHORT_ARRAY) {
             if ($tokens[$stackPtr]['line'] > $tokens[$prevNonWhitespaceToken]['line']) {
-                $error = 'Array open bracket should be after function open parenthesis "(["';
+                $error = 'Array openening bracket should be after function open parenthesis "(["';
                 $data  = array();
                 $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'ShortArrayOpenWrongLine', $data);
                 if ($fix === true) {
@@ -417,11 +417,31 @@ class ArrayDeclarationSniff implements Sniff
             }
         }
 
-        // Check the closing bracket is on a new line.
+        // Get content before closing array bracket/brace.
         $lastContent = $phpcsFile->findPrevious(T_WHITESPACE, ($arrayEnd - 1), $arrayStart, true);
+
+        // Check for ) after last Array end.
+        $afterCloser = $phpcsFile->findNext(T_WHITESPACE, ($arrayEnd + 1), null, true);
+        if ($tokens[$afterCloser]['code'] === T_CLOSE_PARENTHESIS) {
+            if ($tokens[$afterCloser]['column'] !== ($tokens[$arrayEnd]['column'] + 1)) {
+                $error = 'Closing parenthesis should be after array closing bracket "])"';
+                $data  = array();
+                $fix   = $phpcsFile->addFixableError($error, $afterCloser, 'CloseBracketAfterArrayBracket');
+                if ($fix === true) {
+                    $phpcsFile->fixer->beginChangeset();
+                    for ($i = ($arrayEnd + 1); $i < $afterCloser; $i++) {
+                        $phpcsFile->fixer->replaceToken($i, '');
+                    }
+
+                    $phpcsFile->fixer->endChangeset();
+                }
+            }
+        }
+
+        // Check the closing bracket is on a new line.
         if ($tokens[$lastContent]['line'] === $tokens[$arrayEnd]['line']) {
             $error = 'Closing parenthesis of array declaration must be on a new line';
-            $fix   = $phpcsFile->addFixableError($error, $arrayEnd, 'CloseBraceNewLine');
+            $fix   = $phpcsFile->addFixableError($error, $arrayEnd, 'CloseArrayBraceNewLine');
             if ($fix === true) {
                 $phpcsFile->fixer->addNewlineBefore($arrayEnd);
             }
@@ -442,7 +462,7 @@ class ArrayDeclarationSniff implements Sniff
                       ($found / $this->tabWidth),
                      );
 
-            $fix = $phpcsFile->addFixableError($error, $arrayEnd, 'CloseBraceNotAligned', $data);
+            $fix = $phpcsFile->addFixableError($error, $arrayEnd, 'CloseArrayBraceNotAligned', $data);
             if ($fix === true) {
                 if ($found === 0) {
                     $phpcsFile->fixer->addContent(($arrayEnd - 1), str_repeat(' ', $expected));
