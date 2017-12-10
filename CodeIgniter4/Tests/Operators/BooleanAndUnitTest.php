@@ -1,6 +1,6 @@
 <?php
 /**
- * Boolean Or Unit Test
+ * Boolean And Unit Test
  *
  * @package   CodeIgniter4-Standard
  * @author    Louis Linehan <louis.linehan@gmail.com>
@@ -12,7 +12,7 @@ namespace CodeIgniter4\Tests\Operators;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
-class BooleanOrUnitTest extends AbstractSniffUnitTest
+class BooleanAndUnitTest extends AbstractSniffUnitTest
 {
 
 
@@ -30,7 +30,7 @@ class BooleanOrUnitTest extends AbstractSniffUnitTest
                 3 => 1,
                 4 => 1,
                 5 => 1,
-                6 => 2,
+                7 => 2,
                );
 
     }//end getErrorList()

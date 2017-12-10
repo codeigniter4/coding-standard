@@ -69,7 +69,12 @@ class FilenameMatchesClassSniff implements Sniff
             return;
         }
 
-        $className      = trim($phpcsFile->getDeclarationName($stackPtr));
+        $className = trim($phpcsFile->getDeclarationName($stackPtr));
+
+        if (strpos($className, 'Migration') === 0 && strpos($fileName, '_') !== false) {
+            return;
+        }
+
         $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($stackPtr + 1), null, true);
         $type           = $tokens[$stackPtr]['content'];
 
