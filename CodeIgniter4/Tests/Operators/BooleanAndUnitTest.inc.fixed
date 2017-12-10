@@ -1,0 +1,7 @@
+<?php
+
+if ($a && $b === $c) {} // Fail
+if ($a === $b && $c) {} // Fail
+if ($a === $b && $a === $c) {} // Fail
+if ($a === $b && $a === $c) {} // Fail
+if ($a === 1 && $a === 2 && $a === 3) {} // Fail 2 errors
