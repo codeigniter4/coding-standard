@@ -2,7 +2,7 @@
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.0-beta0012
+Version 1.0.0
 
 | Master | Develop |
 | :---: | :---: |
@@ -23,8 +23,6 @@ PHP (7.1 or greater) with mbstring extension.
 
 ### Composer install
 
-As this is a beta version you will need to add `"minimum-stability": "dev"` to your 'composer.json' file.
-
 `cd /Path/To/MyProject`  
 `composer require bcit-ci/codeigniter4-standard --dev`  
 
@@ -34,7 +32,7 @@ Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin c
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/bcit-ci/CodeIgniter4-Standard/archive/v1.0.0-beta0012.zip).
+Download [CodeIgniter4-Standard](https://github.com/bcit-ci/CodeIgniter4-Standard/archive/v1.0.0.zip).
 
 Set `standard ` paths to your local filesystem:
 

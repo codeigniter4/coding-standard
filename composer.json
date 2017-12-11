@@ -1,7 +1,7 @@
 {
 	"name": "bcit-ci/codeigniter4-standard",
 	"description": "CodeIgniter 4 Standard for PHP_CodeSniffer 3.",
-	"version":"1.0.0-beta0012",
+	"version":"1.0.0",
 	"license":"MIT",
 	"authors": [
         {
