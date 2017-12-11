@@ -2,12 +2,12 @@
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.0-beta0012
+Version 1.0.0
 
 | Master | Develop |
 | :---: | :---: |
-| [![Build Status](https://travis-ci.org/louisl/CodeIgniter4-Standard.svg?branch=master)](https://travis-ci.org/louisl/CodeIgniter4-Standard) | [![Build Status](https://travis-ci.org/louisl/CodeIgniter4-Standard.svg?branch=develop)](https://travis-ci.org/louisl/CodeIgniter4-Standard) |
-| [![Coverage Status](https://coveralls.io/repos/github/louisl/CodeIgniter4-Standard/badge.svg?branch=master)](https://coveralls.io/github/louisl/CodeIgniter4-Standard?branch=master) | [![Coverage Status](https://coveralls.io/repos/github/louisl/CodeIgniter4-Standard/badge.svg?branch=develop)](https://coveralls.io/github/louisl/CodeIgniter4-Standard?branch=develop) |
+| [![Build Status](https://travis-ci.org/bcit-ci/CodeIgniter4-Standard.svg?branch=master)](https://travis-ci.org/bcit-ci/CodeIgniter4-Standard) | [![Build Status](https://travis-ci.org/bcit-ci/CodeIgniter4-Standard.svg?branch=develop)](https://travis-ci.org/bcit-ci/CodeIgniter4-Standard) |
+| [![Coverage Status](https://coveralls.io/repos/github/bcit-ci/CodeIgniter4-Standard/badge.svg?branch=master)](https://coveralls.io/github/bcit-ci/CodeIgniter4-Standard?branch=master) | [![Coverage Status](https://coveralls.io/repos/github/bcit-ci/CodeIgniter4-Standard/badge.svg?branch=develop)](https://coveralls.io/github/bcit-ci/CodeIgniter4-Standard?branch=develop) |
 
 ***This is currently a work in progress.***
 
@@ -23,18 +23,16 @@ PHP (7.1 or greater) with mbstring extension.
 
 ### Composer install
 
-As this is a beta version you will need to add `"minimum-stability": "dev"` to your 'composer.json' file.
-
 `cd /Path/To/MyProject`  
-`composer require louisl/codeigniter4-standard:1.* --dev`  
+`composer require bcit-ci/codeigniter4-standard --dev`  
 
 Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin config to:
 
-`/Path/To/MyProject/vendor/louisl/codeigniter4-standard/CodeIgniter4/ruleset.xml`
+`/Path/To/MyProject/vendor/bcit-ci/codeigniter4-standard/CodeIgniter4/ruleset.xml`
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/louisl/CodeIgniter4-Standard/archive/v1.0.0-beta0012.zip).
+Download [CodeIgniter4-Standard](https://github.com/bcit-ci/CodeIgniter4-Standard/archive/v1.0.0.zip).
 
 Set `standard ` paths to your local filesystem:
 
@@ -52,11 +50,11 @@ You should see something like:-
 
 Either clone this repository...
 
-`git clone -b master --depth 1 https://github.com/louisl/CodeIgniter4-Standard.git`.
+`git clone -b master --depth 1 https://github.com/bcit-ci/CodeIgniter4-Standard.git`.
 
 or use composer...
 
-`composer global require louisl/codeigniter4-standard`
+`composer global require bcit-ci/codeigniter4-standard`
 
 or download.
 
