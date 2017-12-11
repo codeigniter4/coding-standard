@@ -4,8 +4,8 @@
  *
  * @package   CodeIgniter4-Standard
  * @author    Louis Linehan <louis.linehan@gmail.com>
- * @copyright 2017 Louis Linehan
- * @license   https://github.com/louisl/CodeIgniter4-Standard/blob/master/LICENSE MIT License
+ * @copyright 2017 British Columbia Institute of Technology
+ * @license   https://github.com/bcit-ci/CodeIgniter4-Standard/blob/master/LICENSE MIT License
  */
 
 namespace CodeIgniter4\Tests\Arrays;
