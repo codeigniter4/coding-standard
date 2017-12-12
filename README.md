@@ -2,7 +2,7 @@
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.0
+Version 1.0.1
 
 | Master | Develop |
 | :---: | :---: |
@@ -24,15 +24,15 @@ PHP (7.1 or greater) with mbstring extension.
 ### Composer install
 
 `cd /Path/To/MyProject`  
-`composer require bcit-ci/codeigniter4-standard --dev`  
+`composer require codeigniter4/codeigniter4-standard --dev`  
 
 Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin config to:
 
-`/Path/To/MyProject/vendor/bcit-ci/codeigniter4-standard/CodeIgniter4/ruleset.xml`
+`/Path/To/MyProject/vendor/codeigniter4/codeigniter4-standard/CodeIgniter4/ruleset.xml`
 
 ### Download install
 
-Download [CodeIgniter4-Standard](https://github.com/bcit-ci/CodeIgniter4-Standard/archive/v1.0.0.zip).
+Download [CodeIgniter4-Standard](https://github.com/bcit-ci/CodeIgniter4-Standard/archive/v1.0.1.zip).
 
 Set `standard ` paths to your local filesystem:
 
@@ -54,7 +54,7 @@ Either clone this repository...
 
 or use composer...
 
-`composer global require bcit-ci/codeigniter4-standard`
+`composer global require codeigniter4/codeigniter4-standard`
 
 or download.
 
