@@ -39,6 +39,9 @@
     Methods and functions MUST have a doc block comment.
     -->
     <rule ref="Squiz.Commenting.FunctionComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital">
+        <severity>0</severity>
+    </rule>
     <rule ref="Squiz.Commenting.FunctionComment.ParamCommentFullStop">
         <severity>0</severity>
     </rule>
