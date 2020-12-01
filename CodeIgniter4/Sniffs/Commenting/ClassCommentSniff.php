@@ -32,7 +32,7 @@ class ClassCommentSniff extends FileCommentSniff
      */
     protected $tags = array(
                        '@package'    => array(
-                                         'required'       => true,
+                                         'required'       => false,
                                          'allow_multiple' => false,
                                         ),
                        '@subpackage' => array(
