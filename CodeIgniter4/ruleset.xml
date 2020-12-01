@@ -45,6 +45,9 @@
     <rule ref="Squiz.Commenting.FunctionComment.ParamCommentFullStop">
         <severity>0</severity>
     </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.ThrowsNoFullStop">
+        <severity>0</severity>
+    </rule>
     <!--
     Doc block comment alignment.
     -->
