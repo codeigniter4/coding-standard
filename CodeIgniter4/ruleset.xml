@@ -45,6 +45,9 @@
     <rule ref="Squiz.Commenting.FunctionComment.ParamCommentFullStop">
         <severity>0</severity>
     </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.EmptyThrows">
+        <severity>0</severity>
+    </rule>
     <rule ref="Squiz.Commenting.FunctionComment.ThrowsNotCapital">
         <severity>0</severity>
     </rule>
