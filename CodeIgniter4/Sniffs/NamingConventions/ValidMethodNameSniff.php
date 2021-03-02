@@ -35,7 +35,7 @@ class ValidMethodNameSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct(array(T_CLASS, T_ANON_CLASS, T_INTERFACE, T_TRAIT), array(T_FUNCTION), true);
+        parent::__construct([T_CLASS, T_ANON_CLASS, T_INTERFACE, T_TRAIT], [T_FUNCTION], true);
 
     }//end __construct()
 
@@ -79,7 +79,7 @@ class ValidMethodNameSniff extends AbstractScopeSniff
         if (preg_match('|^__[^_]|', $methodName) !== 0) {
             $magicPart = strtolower(substr($methodName, 2));
             if (isset(Common::$magicMethods[$magicPart]) === false) {
-                $errorData = array($className.'::'.$methodName);
+                $errorData = [$className.'::'.$methodName];
                 $error     = 'Method name "%s" is invalid; only PHP magic methods should be prefixed with a double underscore';
                 $phpcsFile->addError($error, $stackPtr, 'MethodDoubleUnderscore', $errorData);
             }
@@ -96,7 +96,7 @@ class ValidMethodNameSniff extends AbstractScopeSniff
 
         // Naming check.
         if (Common::isCamelCaps($namePart, false, true, false) === false) {
-            $errorData = array($methodName);
+            $errorData = [$methodName];
             $error     = 'Method "%s" must be lowerCamelCase';
             $phpcsFile->addError($error, $stackPtr, 'MethodNotLowerCamelCase', $errorData);
         }
@@ -106,7 +106,7 @@ class ValidMethodNameSniff extends AbstractScopeSniff
             if (isset(Common::$publicMethodNames[$methodName]) === false) {
                 $methodProps = $phpcsFile->getMethodProperties($stackPtr);
                 $scope       = $methodProps['scope'];
-                $errorData   = array($className.'::'.$methodName);
+                $errorData   = [$className.'::'.$methodName];
                 $error       = ucfirst($scope).' method "%s" must not be prefixed with an underscore';
                 $phpcsFile->addError($error, $stackPtr, 'MethodMustNotHaveUnderscore', $errorData);
             }
@@ -115,10 +115,10 @@ class ValidMethodNameSniff extends AbstractScopeSniff
         // Warn if method name is over 50 chars.
         $warningLimit = 50;
         if (strlen($methodName) > $warningLimit) {
-            $errorData = array(
-                          $methodName,
-                          $warningLimit,
-                         );
+            $errorData = [
+                $methodName,
+                $warningLimit,
+            ];
 
             $warning = 'Method "%s" is over "%s" chars';
             $phpcsFile->addWarning($warning, $stackPtr, 'MethodNameIsLong', $errorData);

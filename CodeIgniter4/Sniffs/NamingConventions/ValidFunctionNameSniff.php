@@ -28,7 +28,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
      */
     public function __construct()
     {
-        parent::__construct(array(T_CLASS, T_ANON_CLASS, T_INTERFACE, T_TRAIT), array(T_FUNCTION), true);
+        parent::__construct([T_CLASS, T_ANON_CLASS, T_INTERFACE, T_TRAIT], [T_FUNCTION], true);
 
     }//end __construct()
 
@@ -53,7 +53,7 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         if (preg_match('|^__[^_]|', $functionName) !== 0) {
             $magicPart = strtolower(substr($functionName, 2));
             if (isset(Common::$magicMethods[$magicPart]) === false) {
-                $errorData = array($functionName);
+                $errorData = [$functionName];
                 $error     = 'Function name "%s" is invalid; only PHP magic methods should be prefixed with a double underscore';
                 $phpcsFile->addError($error, $stackPtr, 'FunctionDoubleUnderscore', $errorData);
             }
@@ -64,17 +64,17 @@ class ValidFunctionNameSniff extends AbstractScopeSniff
         if (Common::isLowerSnakeCase($functionName) === false
             || $functionName !== strtolower($functionName)
         ) {
-            $errorData = array($functionName);
+            $errorData = [$functionName];
             $error     = 'Function "%s" must be snake_case';
             $phpcsFile->addError($error, $stackPtr, 'FunctionNotSnakeCase', $errorData);
         }
 
         $warningLimit = 50;
         if (strlen($functionName) > $warningLimit) {
-            $errorData = array(
-                          $functionName,
-                          $warningLimit,
-                         );
+            $errorData = [
+                $functionName,
+                $warningLimit,
+            ];
             $warning   = 'Function "%s" is over "%s" chars';
             $phpcsFile->addWarning($warning, $stackPtr, 'FunctionNameIsLong', $errorData);
         }

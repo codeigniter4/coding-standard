@@ -31,7 +31,7 @@ class BooleanOrSniff implements Sniff
      */
     public function register()
     {
-        return array(T_LOGICAL_OR);
+        return [T_LOGICAL_OR];
 
     }//end register()
 
@@ -51,7 +51,7 @@ class BooleanOrSniff implements Sniff
 
         if ($tokens[$stackPtr]['code'] === T_LOGICAL_OR) {
             $error = '"%s" is not allowed, use "||" instead';
-            $data  = array($tokens[$stackPtr]['content']);
+            $data  = [$tokens[$stackPtr]['content']];
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'LogicalOrNotAllowed', $data);
             if ($fix === true) {
                 $phpcsFile->fixer->beginChangeset();

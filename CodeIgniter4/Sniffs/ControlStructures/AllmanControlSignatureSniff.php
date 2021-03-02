@@ -28,10 +28,10 @@ class AllmanControlSignatureSniff implements Sniff
      *
      * @var array
      */
-    public $supportedTokenizers = array(
-                                   'PHP',
-                                   'JS',
-                                  );
+    public $supportedTokenizers = [
+        'PHP',
+        'JS',
+    ];
 
 
     /**
@@ -41,17 +41,17 @@ class AllmanControlSignatureSniff implements Sniff
      */
     public function register()
     {
-        return array(
-                T_TRY,
-                T_CATCH,
-                T_DO,
-                T_WHILE,
-                T_FOR,
-                T_IF,
-                T_FOREACH,
-                T_ELSE,
-                T_ELSEIF,
-               );
+        return [
+            T_TRY,
+            T_CATCH,
+            T_DO,
+            T_WHILE,
+            T_FOR,
+            T_IF,
+            T_FOREACH,
+            T_ELSE,
+            T_ELSEIF,
+        ];
 
     }//end register()
 
@@ -92,7 +92,7 @@ class AllmanControlSignatureSniff implements Sniff
                 $prevContentLine = $tokens[($prevContentPtr)]['line'];
 
                 if ($keywordLine === $prevContentLine) {
-                    $data  = array($tokens[$stackPtr]['content']);
+                    $data  = [$tokens[$stackPtr]['content']];
                     $error = 'Scope keyword "%s" should be on a new line';
                     $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'ScopeKeywordOnNewLine', $data);
                     if ($fix === true) {
@@ -123,10 +123,10 @@ class AllmanControlSignatureSniff implements Sniff
 
             if ($found !== 1) {
                 $error = 'Expected 1 space after scope keyword "%s", found %s';
-                $data  = array(
-                          strtoupper($tokens[$stackPtr]['content']),
-                          $found,
-                         );
+                $data  = [
+                    strtoupper($tokens[$stackPtr]['content']),
+                    $found,
+                ];
 
                 $fix = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfterScopeKeyword', $data);
                 if ($fix === true) {
@@ -166,10 +166,10 @@ class AllmanControlSignatureSniff implements Sniff
             }
 
             if ($lineDifference !== 1) {
-                $data = array(
-                         $tokens[$openingBracePtr]['content'],
-                         $tokens[$stackPtr]['content'],
-                        );
+                $data = [
+                    $tokens[$openingBracePtr]['content'],
+                    $tokens[$stackPtr]['content'],
+                ];
                 if (isset($closerLine) === true) {
                     $error = 'Opening brace "%s" should be on a new line after "%s (...)"';
                 } else {
@@ -202,7 +202,7 @@ class AllmanControlSignatureSniff implements Sniff
             $lineDifference = ($nextContentLine - $braceLine);
 
             if ($lineDifference === 0 || $lineDifference > 1) {
-                $data  = array($tokens[$openerPtr]['content']);
+                $data  = [$tokens[$openerPtr]['content']];
                 $error = 'Expected content on line after "%s"';
                 $fix   = $phpcsFile->addFixableError($error, $openerPtr, 'NewlineAfterOpeningBrace', $data);
                 if ($fix === true) {
@@ -229,7 +229,7 @@ class AllmanControlSignatureSniff implements Sniff
             $lineDifference = ($braceLine - $prevContentLine);
 
             if ($lineDifference !== 1) {
-                $data  = array($tokens[$closerPtr]['content']);
+                $data  = [$tokens[$closerPtr]['content']];
                 $error = 'Closing brace "%s" should be on a new line';
                 $fix   = $phpcsFile->addFixableError($error, $closerPtr, 'ClosingBraceOnNewLine', $data);
                 if ($fix === true) {

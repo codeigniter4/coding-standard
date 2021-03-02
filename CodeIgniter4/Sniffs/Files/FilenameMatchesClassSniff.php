@@ -40,11 +40,11 @@ class FilenameMatchesClassSniff implements Sniff
      */
     public function register()
     {
-        return array(
-                T_CLASS,
-                T_INTERFACE,
-                T_TRAIT,
-               );
+        return [
+            T_CLASS,
+            T_INTERFACE,
+            T_TRAIT,
+        ];
 
     }//end register()
 
@@ -79,10 +79,10 @@ class FilenameMatchesClassSniff implements Sniff
         $type           = $tokens[$stackPtr]['content'];
 
         if ($fileName !== $className.'.php' && $this->badFilename === false) {
-            $data  = array(
-                      $fileName,
-                      $className.'.php',
-                     );
+            $data  = [
+                $fileName,
+                $className.'.php',
+            ];
             $error = 'Filename "%s" doesn\'t match the expected filename "%s"';
             $phpcsFile->addError($error, $nextContentPtr, ucfirst($type).'BadFilename', $data);
             $phpcsFile->recordMetric($nextContentPtr, 'Filename matches '.$type, 'no');

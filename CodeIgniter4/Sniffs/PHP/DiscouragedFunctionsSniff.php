@@ -30,13 +30,13 @@ class DiscouragedFunctionsSniff extends ForbiddenFunctionsSniff
      * The value is NULL if no alternative exists. IE, the
      * function should just not be used.
      *
-     * @var array(string => string|null)
+     * @var array|null)
      */
-    public $forbiddenFunctions = array(
-                                  'error_log' => null,
-                                  'print_r'   => null,
-                                  'var_dump'  => null,
-                                 );
+    public $forbiddenFunctions = [
+        'error_log' => null,
+        'print_r'   => null,
+        'var_dump'  => null,
+    ];
 
     /**
      * Set error to false to show warnings.
