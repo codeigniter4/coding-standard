@@ -12,6 +12,8 @@ env:
   - STANDARD="CodeIgniter4"
   # Upload covarage to coveralls.
   - COVERALLS="1"
+  # Xdebug3 needs this.
+  - XDEBUG_MODE=coverage
 
 matrix:
     fast_finish: true
