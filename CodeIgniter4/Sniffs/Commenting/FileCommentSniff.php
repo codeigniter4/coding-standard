@@ -33,7 +33,7 @@ class FileCommentSniff implements Sniff
      */
     protected $tags = [
         '@package'    => [
-            'required'       => true,
+            'required'       => false,
             'allow_multiple' => false,
         ],
         '@subpackage' => [
@@ -45,7 +45,7 @@ class FileCommentSniff implements Sniff
             'allow_multiple' => false,
         ],
         '@author'     => [
-            'required'       => true,
+            'required'       => false,
             'allow_multiple' => true,
         ],
         '@copyright'  => [
@@ -53,7 +53,7 @@ class FileCommentSniff implements Sniff
             'allow_multiple' => true,
         ],
         '@license'    => [
-            'required'       => true,
+            'required'       => false,
             'allow_multiple' => false,
         ],
         '@link'       => [
