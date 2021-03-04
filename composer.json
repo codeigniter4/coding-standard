@@ -2,7 +2,6 @@
 	"name": "codeigniter4/codeigniter4-standard",
 	"type": "phpcodesniffer-standard",
 	"description": "CodeIgniter 4 Standard for PHP_CodeSniffer 3.",
-	"version":"1.0.1",
 	"license":"MIT",
 	"authors": [
         {
