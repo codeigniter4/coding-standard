@@ -242,6 +242,11 @@
     Checks there are no blank lines before a function closing brace.
     -->
     <rule ref="CodeIgniter4.WhiteSpace.FunctionClosingBraceSpace"/>
+    <!-- 
+    The keyword elseif SHOULD be used instead of else if so that all control
+    keywords look like single words.
+    -->
+    <rule ref="PSR2.ControlStructures.ElseIfDeclaration"/>
     <!--
     Checks for each declarations are styled properly.
     -->

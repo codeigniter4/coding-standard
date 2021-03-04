@@ -31,10 +31,10 @@ class FunctionDeclarationSniff implements Sniff
      *
      * @var array
      */
-    public $supportedTokenizers = array(
-                                   'PHP',
-                                   'JS',
-                                  );
+    public $supportedTokenizers = [
+        'PHP',
+        'JS',
+    ];
 
     /**
      * The number of spaces code should be indented.
@@ -51,10 +51,10 @@ class FunctionDeclarationSniff implements Sniff
      */
     public function register()
     {
-        return array(
-                T_FUNCTION,
-                T_CLOSURE,
-               );
+        return [
+            T_FUNCTION,
+            T_CLOSURE,
+        ];
 
     }//end register()
 
@@ -95,7 +95,7 @@ class FunctionDeclarationSniff implements Sniff
 
             if ($spaces !== 1) {
                 $error = 'Expected 1 space after FUNCTION keyword; %s found';
-                $data  = array($spaces);
+                $data  = [$spaces];
                 $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'SpaceAfterFunction', $data);
                 if ($fix === true) {
                     if ($spaces === 0) {
@@ -121,7 +121,7 @@ class FunctionDeclarationSniff implements Sniff
 
             if ($spaces !== 0) {
                 $error = 'Expected 0 spaces before opening parenthesis; %s found';
-                $data  = array($spaces);
+                $data  = [$spaces];
                 $fix   = $phpcsFile->addFixableError($error, $openBracket, 'SpaceBeforeOpenParenthesis', $data);
                 if ($fix === true) {
                     $phpcsFile->fixer->replaceToken(($openBracket - 1), '');
@@ -143,7 +143,7 @@ class FunctionDeclarationSniff implements Sniff
 
                 if ($length !== 1) {
                     $error = 'Expected 1 space after USE keyword; found %s';
-                    $data  = array($length);
+                    $data  = [$length];
                     $fix   = $phpcsFile->addFixableError($error, $use, 'SpaceAfterUse', $data);
                     if ($fix === true) {
                         if ($length === 0) {
@@ -164,7 +164,7 @@ class FunctionDeclarationSniff implements Sniff
 
                 if ($length !== 1) {
                     $error = 'Expected 1 space before USE keyword; found %s';
-                    $data  = array($length);
+                    $data  = [$length];
                     $fix   = $phpcsFile->addFixableError($error, $use, 'SpaceBeforeUse', $data);
                     if ($fix === true) {
                         if ($length === 0) {
@@ -201,7 +201,7 @@ class FunctionDeclarationSniff implements Sniff
      */
     public function isMultiLineDeclaration($phpcsFile, $stackPtr, $openBracket, $tokens)
     {
-        $bracketsToCheck = array($stackPtr => $openBracket);
+        $bracketsToCheck = [$stackPtr => $openBracket];
 
         // Closures may use the USE keyword and so be multi-line in this way.
         if ($tokens[$stackPtr]['code'] === T_CLOSURE) {
@@ -391,10 +391,10 @@ class FunctionDeclarationSniff implements Sniff
 
                 if ($expectedIndent !== $foundIndent) {
                     $error = 'Multi-line function declaration not indented correctly; expected %s spaces but found %s';
-                    $data  = array(
-                              $expectedIndent,
-                              $foundIndent,
-                             );
+                    $data  = [
+                        $expectedIndent,
+                        $foundIndent,
+                    ];
 
                     $fix = $phpcsFile->addFixableError($error, $i, 'Indent', $data);
                     if ($fix === true) {

@@ -31,7 +31,7 @@ class IsIdenticalSniff implements Sniff
      */
     public function register()
     {
-        return array(T_IS_EQUAL);
+        return [T_IS_EQUAL];
 
     }//end register()
 
@@ -51,7 +51,7 @@ class IsIdenticalSniff implements Sniff
 
         if ($tokens[$stackPtr]['code'] === T_IS_EQUAL) {
             $error = '"%s" is not allowed, use "===" instead';
-            $data  = array($tokens[$stackPtr]['content']);
+            $data  = [$tokens[$stackPtr]['content']];
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'IsEqualNotAllowed', $data);
             if ($fix === true) {
                 $phpcsFile->fixer->beginChangeset();

@@ -38,7 +38,7 @@ class DisallowTabsInAlignmentSniff implements Sniff
      */
     public function register()
     {
-        return array(T_OPEN_TAG);
+        return [T_OPEN_TAG];
 
     }//end register()
 
@@ -66,11 +66,11 @@ class DisallowTabsInAlignmentSniff implements Sniff
             }
         }
 
-        $checkTokens = array(
-                        T_WHITESPACE             => true,
-                        T_INLINE_HTML            => true,
-                        T_DOC_COMMENT_WHITESPACE => true,
-                       );
+        $checkTokens = [
+            T_WHITESPACE             => true,
+            T_INLINE_HTML            => true,
+            T_DOC_COMMENT_WHITESPACE => true,
+        ];
 
         $tokens = $phpcsFile->getTokens();
 
@@ -105,12 +105,12 @@ class DisallowTabsInAlignmentSniff implements Sniff
                     $spacesPlural = 's';
                 }
 
-                $data  = array(
-                          $countTabs,
-                          $tabsPlural,
-                          $countSpaces,
-                          $spacesPlural,
-                         );
+                $data  = [
+                    $countTabs,
+                    $tabsPlural,
+                    $countSpaces,
+                    $spacesPlural,
+                ];
                 $error = 'Spaces must be used for alignment; %s tab%s and %s space%s found';
 
                 // The fix might make some lines misaligned if the tab didn't fill the number

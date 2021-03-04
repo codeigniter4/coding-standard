@@ -12,6 +12,8 @@ env:
   - STANDARD="CodeIgniter4"
   # Upload covarage to coveralls.
   - COVERALLS="1"
+  # Xdebug3 needs this.
+  - XDEBUG_MODE=coverage
 
 matrix:
     fast_finish: true
@@ -27,7 +29,11 @@ matrix:
         # aliased to a recent 7.x version
         # - php: '7.0'
         # aliased to a recent 7.x version
-        - php: '7.1'
+        # - php: '7.1'
+        - php: '7.2'
+        - php: '7.3'
+        - php: '7.4'
+        # - php: '8.0'
         # aliased to a recent hhvm version
         # - php: 'hhvm'
         # php nightly
@@ -64,4 +70,4 @@ script:
   - ./vendor/bin/phpunit --debug --filter $STANDARD
 
 after_success:
-  - if [[ "$COVERALLS" == "1" ]]; then ./vendor/bin/coveralls -v -x ./build/logs/coverage/clover/clover.xml; fi
+  - if [[ "$COVERALLS" == "1" && "$TRAVIS_PHP_VERSION" == "7.4" ]]; then ./vendor/bin/coveralls -v -x ./build/logs/coverage/clover/clover.xml; fi

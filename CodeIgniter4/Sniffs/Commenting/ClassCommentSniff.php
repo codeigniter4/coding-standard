@@ -30,52 +30,52 @@ class ClassCommentSniff extends FileCommentSniff
      *
      * @var array
      */
-    protected $tags = array(
-                       '@package'    => array(
-                                         'required'       => true,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@subpackage' => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@category'   => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@author'     => array(
-                                         'required'       => false,
-                                         'allow_multiple' => true,
-                                        ),
-                       '@copyright'  => array(
-                                         'required'       => false,
-                                         'allow_multiple' => true,
-                                        ),
-                       '@license'    => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@link'       => array(
-                                         'required'       => false,
-                                         'allow_multiple' => true,
-                                        ),
-                       '@since'      => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@version'    => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@see'        => array(
-                                         'required'       => false,
-                                         'allow_multiple' => true,
-                                        ),
-                       '@deprecated' => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                      );
+    protected $tags = [
+        '@package'    => [
+            'required'       => true,
+            'allow_multiple' => false,
+        ],
+        '@subpackage' => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@category'   => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@author'     => [
+            'required'       => false,
+            'allow_multiple' => true,
+        ],
+        '@copyright'  => [
+            'required'       => false,
+            'allow_multiple' => true,
+        ],
+        '@license'    => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@link'       => [
+            'required'       => false,
+            'allow_multiple' => true,
+        ],
+        '@since'      => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@version'    => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@see'        => [
+            'required'       => false,
+            'allow_multiple' => true,
+        ],
+        '@deprecated' => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+    ];
 
 
     /**
@@ -85,10 +85,10 @@ class ClassCommentSniff extends FileCommentSniff
      */
     public function register()
     {
-        return array(
-                T_CLASS,
-                T_INTERFACE,
-               );
+        return [
+            T_CLASS,
+            T_INTERFACE,
+        ];
 
     }//end register()
 
@@ -108,7 +108,7 @@ class ClassCommentSniff extends FileCommentSniff
 
         $tokens    = $phpcsFile->getTokens();
         $type      = strtolower($tokens[$stackPtr]['content']);
-        $errorData = array($type);
+        $errorData = [$type];
 
         $find   = Tokens::$methodPrefixes;
         $find[] = T_WHITESPACE;

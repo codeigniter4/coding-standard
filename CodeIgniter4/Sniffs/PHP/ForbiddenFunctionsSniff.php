@@ -30,16 +30,16 @@ class ForbiddenFunctionsSniff implements Sniff
      * The value is NULL if no alternative exists. IE, the
      * function should just not be used.
      *
-     * @var array(string => string|null)
+     * @var array|null)
      */
-    public $forbiddenFunctions = array('sizeof' => 'count');
+    public $forbiddenFunctions = ['sizeof' => 'count'];
 
     /**
      * A cache of forbidden function names, for faster lookups.
      *
      * @var array(string)
      */
-    protected $forbiddenFunctionNames = array();
+    protected $forbiddenFunctionNames = [];
 
     /**
      * If true, forbidden functions will be considered regular expressions.
@@ -72,7 +72,7 @@ class ForbiddenFunctionsSniff implements Sniff
                 $this->forbiddenFunctionNames[$i] = '/'.$name.'/i';
             }
 
-            return array(T_STRING);
+            return [T_STRING];
         }
 
         // If we are not pattern matching, we need to work out what
@@ -82,7 +82,7 @@ class ForbiddenFunctionsSniff implements Sniff
             $string .= $name.'();';
         }
 
-        $register = array();
+        $register = [];
 
         $tokens = token_get_all($string);
         array_shift($tokens);
@@ -110,19 +110,19 @@ class ForbiddenFunctionsSniff implements Sniff
     {
         $tokens = $phpcsFile->getTokens();
 
-        $ignore = array(
-                   T_DOUBLE_COLON => true,
-                   T_FUNCTION     => true,
-                   T_CONST        => true,
-                   T_PUBLIC       => true,
-                   T_PRIVATE      => true,
-                   T_PROTECTED    => true,
-                   T_AS           => true,
-                   T_NEW          => true,
-                   T_INSTEADOF    => true,
-                   T_NS_SEPARATOR => true,
-                   T_IMPLEMENTS   => true,
-                  );
+        $ignore = [
+            T_DOUBLE_COLON => true,
+            T_FUNCTION     => true,
+            T_CONST        => true,
+            T_PUBLIC       => true,
+            T_PRIVATE      => true,
+            T_PROTECTED    => true,
+            T_AS           => true,
+            T_NEW          => true,
+            T_INSTEADOF    => true,
+            T_NS_SEPARATOR => true,
+            T_IMPLEMENTS   => true,
+        ];
 
         $prevToken = $phpcsFile->findPrevious(T_WHITESPACE, ($stackPtr - 1), null, true);
 
@@ -195,7 +195,7 @@ class ForbiddenFunctionsSniff implements Sniff
      */
     protected function addError($phpcsFile, $stackPtr, $function, $pattern=null)
     {
-        $data  = array($function);
+        $data  = [$function];
         $error = 'The use of function %s() is ';
         if ($this->error === true) {
             $type   = 'Found';

@@ -39,7 +39,7 @@ class VerticalEmptyLinesSniff implements Sniff
      */
     public function register()
     {
-        return array(T_OPEN_TAG);
+        return [T_OPEN_TAG];
 
     }//end register()
 
@@ -55,7 +55,7 @@ class VerticalEmptyLinesSniff implements Sniff
      */
     public function process(File $phpcsFile, $stackPtr)
     {
-        $errors = array();
+        $errors = [];
         $tokens = $phpcsFile->getTokens();
         for ($i = 1; $i < $phpcsFile->numTokens; $i++) {
             $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($i + 1), null, true);
@@ -66,10 +66,10 @@ class VerticalEmptyLinesSniff implements Sniff
             if ($lines > ($this->allowed) && in_array($errorLine, $errors) === false) {
                 $errors[] = $errorLine;
 
-                $data  = array(
-                          $this->allowed,
-                          Common::pluralize('line', $this->allowed),
-                         );
+                $data  = [
+                    $this->allowed,
+                    Common::pluralize('line', $this->allowed),
+                ];
                 $error = 'Expected only %s empty %s';
                 $fix   = $phpcsFile->addFixableError($error, $errorLine, 'VerticalEmptyLines', $data);
                 if ($fix === true) {

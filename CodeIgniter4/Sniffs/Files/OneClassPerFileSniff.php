@@ -29,12 +29,12 @@ class OneClassPerFileSniff implements Sniff
      *
      * @var array
      */
-    public $filesAllowedMultiClass = array(
-                                      'Exception.php',
-                                      'Exceptions.php',
-                                      'CustomExceptions.php',
-                                      'Response.php',
-                                     );
+    public $filesAllowedMultiClass = [
+        'Exception.php',
+        'Exceptions.php',
+        'CustomExceptions.php',
+        'Response.php',
+    ];
 
 
     /**
@@ -44,7 +44,7 @@ class OneClassPerFileSniff implements Sniff
      */
     public function register()
     {
-        return array(T_CLASS);
+        return [T_CLASS];
 
     }//end register()
 

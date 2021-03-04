@@ -29,12 +29,12 @@ class HelperFileSniff implements Sniff
      *
      * @var array
      */
-    public $unwantedTokens = array(
-                              T_CLASS,
-                              T_ANON_CLASS,
-                              T_INTERFACE,
-                              T_TRAIT,
-                             );
+    public $unwantedTokens = [
+        T_CLASS,
+        T_ANON_CLASS,
+        T_INTERFACE,
+        T_TRAIT,
+    ];
 
     /**
      * If the file has a bad filename.
@@ -53,13 +53,13 @@ class HelperFileSniff implements Sniff
      */
     public function register()
     {
-        return array(
-                T_FUNCTION,
-                T_CLASS,
-                T_ANON_CLASS,
-                T_INTERFACE,
-                T_TRAIT,
-               );
+        return [
+            T_FUNCTION,
+            T_CLASS,
+            T_ANON_CLASS,
+            T_INTERFACE,
+            T_TRAIT,
+        ];
 
     }//end register()
 
@@ -82,10 +82,10 @@ class HelperFileSniff implements Sniff
             // Check the filename.
             $expectedFilename = preg_replace('/_{2,}/', '_', strtolower($fileName));
             if ($fileName !== $expectedFilename && $this->badFilename === false) {
-                $data  = array(
-                          $fileName,
-                          $expectedFilename,
-                         );
+                $data  = [
+                    $fileName,
+                    $expectedFilename,
+                ];
                 $error = 'Helper filename "%s" doesn\'t match the expected filename "%s"';
                 $phpcsFile->addError($error, 1, 'HelperBadFilename', $data);
                 $this->badFilename = true;
