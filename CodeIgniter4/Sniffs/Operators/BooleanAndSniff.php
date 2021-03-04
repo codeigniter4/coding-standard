@@ -31,7 +31,7 @@ class BooleanAndSniff implements Sniff
      */
     public function register()
     {
-        return array(T_LOGICAL_AND);
+        return [T_LOGICAL_AND];
 
     }//end register()
 
@@ -51,7 +51,7 @@ class BooleanAndSniff implements Sniff
 
         if ($tokens[$stackPtr]['code'] === T_LOGICAL_AND) {
             $error = '"%s" is not allowed, use "&&" instead';
-            $data  = array($tokens[$stackPtr]['content']);
+            $data  = [$tokens[$stackPtr]['content']];
             $fix   = $phpcsFile->addFixableError($error, $stackPtr, 'LogicalAndNotAllowed', $data);
             if ($fix === true) {
                 $phpcsFile->fixer->beginChangeset();

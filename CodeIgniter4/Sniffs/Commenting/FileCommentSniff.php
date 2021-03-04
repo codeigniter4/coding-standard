@@ -31,52 +31,52 @@ class FileCommentSniff implements Sniff
      *
      * @var array
      */
-    protected $tags = array(
-                       '@package'    => array(
-                                         'required'       => true,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@subpackage' => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@category'   => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@author'     => array(
-                                         'required'       => true,
-                                         'allow_multiple' => true,
-                                        ),
-                       '@copyright'  => array(
-                                         'required'       => false,
-                                         'allow_multiple' => true,
-                                        ),
-                       '@license'    => array(
-                                         'required'       => true,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@link'       => array(
-                                         'required'       => false,
-                                         'allow_multiple' => true,
-                                        ),
-                       '@since'      => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@version'    => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                       '@see'        => array(
-                                         'required'       => false,
-                                         'allow_multiple' => true,
-                                        ),
-                       '@deprecated' => array(
-                                         'required'       => false,
-                                         'allow_multiple' => false,
-                                        ),
-                      );
+    protected $tags = [
+        '@package'    => [
+            'required'       => true,
+            'allow_multiple' => false,
+        ],
+        '@subpackage' => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@category'   => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@author'     => [
+            'required'       => true,
+            'allow_multiple' => true,
+        ],
+        '@copyright'  => [
+            'required'       => false,
+            'allow_multiple' => true,
+        ],
+        '@license'    => [
+            'required'       => true,
+            'allow_multiple' => false,
+        ],
+        '@link'       => [
+            'required'       => false,
+            'allow_multiple' => true,
+        ],
+        '@since'      => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@version'    => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+        '@see'        => [
+            'required'       => false,
+            'allow_multiple' => true,
+        ],
+        '@deprecated' => [
+            'required'       => false,
+            'allow_multiple' => false,
+        ],
+    ];
 
 
     /**
@@ -86,7 +86,7 @@ class FileCommentSniff implements Sniff
      */
     public function register()
     {
-        return array(T_OPEN_TAG);
+        return [T_OPEN_TAG];
 
     }//end register()
 
@@ -156,7 +156,7 @@ class FileCommentSniff implements Sniff
         $nextContentPtr = $phpcsFile->findNext(T_WHITESPACE, ($commentCloser + 1), null, true);
         $lineDiff       = ($tokens[$nextContentPtr]['line'] - $tokens[$commentCloser]['line']);
         if ($lineDiff === 1) {
-            $data  = array(1);
+            $data  = [1];
             $error = 'Expected %s empty line after file doc comment';
             $fix   = $phpcsFile->addFixableError($error, ($commentCloser + 1), 'NoEmptyLineAfterFileDocComment', $data);
             if ($fix === true) {
@@ -194,8 +194,8 @@ class FileCommentSniff implements Sniff
 
         $commentEnd = $tokens[$commentStart]['comment_closer'];
 
-        $foundTags = array();
-        $tagTokens = array();
+        $foundTags = [];
+        $tagTokens = [];
         foreach ($tokens[$commentStart]['comment_tags'] as $tag) {
             $name = $tokens[$tag]['content'];
             if (isset($this->tags[$name]) === false) {
@@ -204,10 +204,10 @@ class FileCommentSniff implements Sniff
 
             if ($this->tags[$name]['allow_multiple'] === false && isset($tagTokens[$name]) === true) {
                 $error = 'Only one %s tag is allowed in a %s comment';
-                $data  = array(
-                          $name,
-                          $docBlock,
-                         );
+                $data  = [
+                    $name,
+                    $docBlock,
+                ];
                 $phpcsFile->addError($error, $tag, 'Duplicate'.ucfirst(substr($name, 1)).'Tag', $data);
             }
 
@@ -217,10 +217,10 @@ class FileCommentSniff implements Sniff
             $string = $phpcsFile->findNext(T_DOC_COMMENT_STRING, $tag, $commentEnd);
             if ($string === false || $tokens[$string]['line'] !== $tokens[$tag]['line']) {
                 $error = 'Content missing for %s tag in %s comment';
-                $data  = array(
-                          $name,
-                          $docBlock,
-                         );
+                $data  = [
+                    $name,
+                    $docBlock,
+                ];
                 $phpcsFile->addError($error, $tag, 'Empty'.ucfirst(substr($name, 1)).'Tag', $data);
                 continue;
             }
@@ -232,10 +232,10 @@ class FileCommentSniff implements Sniff
             if (isset($tagTokens[$tag]) === false) {
                 if ($tagData['required'] === true) {
                     $error = 'Missing %s tag in %s comment';
-                    $data  = array(
-                              $tag,
-                              $docBlock,
-                             );
+                    $data  = [
+                        $tag,
+                        $docBlock,
+                    ];
                     $phpcsFile->addError($error, $commentEnd, 'Missing'.ucfirst(substr($tag, 1)).'Tag', $data);
                 }
 
@@ -244,7 +244,7 @@ class FileCommentSniff implements Sniff
                 $method = 'process'.substr($tag, 1);
                 if (method_exists($this, $method) === true) {
                     // Process each tag if a method is defined.
-                    call_user_func(array($this, $method), $phpcsFile, $tagTokens[$tag]);
+                    call_user_func([$this, $method], $phpcsFile, $tagTokens[$tag]);
                 }
             }
 
@@ -254,10 +254,10 @@ class FileCommentSniff implements Sniff
 
             if ($foundTags[$pos] !== $tag) {
                 $error = 'The tag in position %s should be the %s tag';
-                $data  = array(
-                          ($pos + 1),
-                          $tag,
-                         );
+                $data  = [
+                    ($pos + 1),
+                    $tag,
+                ];
                 $phpcsFile->addError($error, $tokens[$commentStart]['comment_tags'][$pos], ucfirst(substr($tag, 1)).'TagOrder', $data);
             }
 
@@ -302,10 +302,10 @@ class FileCommentSniff implements Sniff
             if ($isInvalidPackage === true) {
                 $error     = 'Package name "%s" is not valid. Use "%s" instead';
                 $validName = trim($newName, '_');
-                $data      = array(
-                              $content,
-                              $validName,
-                             );
+                $data      = [
+                    $content,
+                    $validName,
+                ];
                 $phpcsFile->addWarning($error, $tag, 'InvalidPackage', $data);
             }
         }//end foreach
@@ -415,7 +415,7 @@ class FileCommentSniff implements Sniff
             }
 
             $content = $tokens[($tag + 2)]['content'];
-            $matches = array();
+            $matches = [];
             if (preg_match('/^([0-9]{4})((.{1})([0-9]{4}))? (.+)$/', $content, $matches) !== 0) {
                 // Check earliest-latest year order.
                 if ($matches[3] !== '') {
@@ -456,7 +456,7 @@ class FileCommentSniff implements Sniff
             }
 
             $content = $tokens[($tag + 2)]['content'];
-            $matches = array();
+            $matches = [];
             preg_match('/^([^\s]+)\s+(.*)/', $content, $matches);
 
             if (count($matches) !== 3) {
@@ -467,7 +467,7 @@ class FileCommentSniff implements Sniff
             // Check the url is before the text part if it's included.
             $parts = explode(' ', $content);
             if ((count($parts) > 1)) {
-                $matches = array();
+                $matches = [];
                 preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $parts[0], $matches);
                 if (count($matches) !== 1) {
                     $error = 'The URL must come before the license name';
@@ -497,12 +497,12 @@ class FileCommentSniff implements Sniff
             }
 
             $content = $tokens[($tag + 2)]['content'];
-            $matches = array();
+            $matches = [];
 
             // Check the url is before the text part if it's included.
             $parts = explode(' ', $content);
             if ((count($parts) > 1)) {
-                $matches = array();
+                $matches = [];
                 preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $parts[0], $matches);
                 if (count($matches) !== 1) {
                     $error = 'The URL must come before the description';
@@ -535,7 +535,7 @@ class FileCommentSniff implements Sniff
             // Split into parts if content has a space.
             $parts = explode(' ', $content);
             // Check if the first part contains a semantic version number.
-            $matches = array();
+            $matches = [];
             preg_match('/^(?:(\d+)\.)?(?:(\d+)\.)?(\*|\d+)$/', $parts[0], $matches);
 
             if (strstr($content, 'CVS:') === false

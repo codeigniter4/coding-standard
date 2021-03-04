@@ -29,10 +29,11 @@ class FunctionClosingBraceSpaceSniff implements Sniff
      *
      * @var array
      */
-    public $supportedTokenizers = array(
-                                   'PHP',
-                                   'JS',
-                                  );
+    public $supportedTokenizers = [
+        'PHP',
+        'JS',
+    ];
+
     /**
      * Allowed lines before a closing function bracket.
      *
@@ -55,10 +56,10 @@ class FunctionClosingBraceSpaceSniff implements Sniff
      */
     public function register()
     {
-        return array(
-                T_FUNCTION,
-                T_CLOSURE,
-               );
+        return [
+            T_FUNCTION,
+            T_CLOSURE,
+        ];
 
     }//end register()
 
@@ -127,10 +128,10 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                 }
             } else if ($found > $this->allowedNestedLines) {
                 $error = 'Expected %s blank lines before closing brace of nested function; %s found';
-                $data  = array(
-                          $this->allowedNestedLines,
-                          $found,
-                         );
+                $data  = [
+                    $this->allowedNestedLines,
+                    $found,
+                ];
                 $fix   = $phpcsFile->addFixableError($error, $closeBrace, 'SpacingBeforeNestedClose', $data);
 
                 if ($fix === true) {
@@ -164,11 +165,11 @@ class FunctionClosingBraceSpaceSniff implements Sniff
                 }
 
                 $error = 'Expected %s blank line%s before closing function brace; %s found';
-                $data  = array(
-                          $this->allowedLines,
-                          $plural,
-                          $found,
-                         );
+                $data  = [
+                    $this->allowedLines,
+                    $plural,
+                    $found,
+                ];
                 $fix   = $phpcsFile->addFixableError($error, $closeBrace, 'SpacingBeforeClose', $data);
 
                 if ($fix === true) {
