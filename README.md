@@ -2,7 +2,7 @@
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
 
-Version 1.0.1
+Version 1
 
 | Master | Develop |
 | :---: | :---: |
@@ -23,8 +23,8 @@ PHP (7.1 or greater) with mbstring extension.
 
 ### Composer install
 
-`cd /Path/To/MyProject`  
-`composer require codeigniter4/codeigniter4-standard --dev`  
+`cd /Path/To/MyProject`
+`composer require codeigniter4/codeigniter4-standard --dev`
 
 Set the `phpcs standard path` and `phpcbf standard path` in your editor/plugin config to:
 
@@ -109,72 +109,6 @@ Directory (recursive).
 or if globally installed.
 
 `phpcbf /Path/To/MyProject --standard=CodeIgniter4`
-
-## Example editor configs
-
-### SublimeText project config
-
-Project > Edit Project
-
-Set it to your preference.
-
-```
-{
-    "SublimeLinter":
-    {
-        "linters":
-        {
-            "phpcs":
-            {
-                "@disable": false,
-                "cmd": "/Path/To/php_codesniffer/bin/phpcs",
-                // Or if installed globally. "cmd": "phpcs",
-                "standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml"
-            }
-        }
-    },
-    "folders":
-    [
-        {
-            "path": "/Path/To/MyProject"
-        }
-    ],
-    "settings":
-    {
-        "phpcs":
-        {
-            "extensions_to_execute":
-            [
-                "php"
-            ],
-            "phpcs_executable_path": "/Path/To/php_codesniffer/bin/phpcs",
-            // Or if installed globally. "phpcbf_executable_path": "phpcs",
-            "phpcs_additional_args":
-            {
-                "--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
-                // Optional don't show warnings
-                // "-n": ""
-            },
-            "phpcbf_executable_path": "/Path/To/php_codesniffer/bin/phpcbf",
-            // Or if installed globally. "phpcbf_executable_path": "phpcbf",
-            "phpcbf_additional_args":
-            {
-                "--standard": "/Path/To/CodeIgniter4-Standard/CodeIgniter4/ruleset.xml",
-                // Optional don't fix warnings (if they're fixable)
-                // "-n": ""
-            },
-            // Execute the sniffer on file save. (Using contextual menu instead)
-            "phpcs_execute_on_save": false,
-            // Show the error list after save. (Using sublime linter instead)
-            "phpcs_show_errors_on_save": false,
-            // Show the errors in the quick panel so you can then goto line. (Gets annoying)
-            "phpcs_show_quick_panel": false,
-            // Turn the debug output on/off.
-            "show_debug": false
-        }
-    }
-}
-```
 
 ## Credits
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ruleset name="CodeIgniter4">
     <description>CodeIgniter 4 coding standard for PHP_CodeSniffer</description>
-    <!-- 
+    <!--
      * CodeIgniter 4 coding standard for PHP_CodeSniffer
      *
      * @author    Louis Linehan <louis.linehan@gmail.com>
@@ -39,7 +39,19 @@
     Methods and functions MUST have a doc block comment.
     -->
     <rule ref="Squiz.Commenting.FunctionComment"/>
+    <rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital">
+        <severity>0</severity>
+    </rule>
     <rule ref="Squiz.Commenting.FunctionComment.ParamCommentFullStop">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.EmptyThrows">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.ThrowsNotCapital">
+        <severity>0</severity>
+    </rule>
+    <rule ref="Squiz.Commenting.FunctionComment.ThrowsNoFullStop">
         <severity>0</severity>
     </rule>
     <!--
@@ -68,10 +80,10 @@
     -->
     <arg name="tab-width" value="4"/>
     <!--
-    Ignore application/Views/ directory. 
+    Ignore application/Views/ directory.
     Ignore application/ThirdParty/ directory.
     Ignore system/ThirdParty/ directory.
-    There could be a mix of styles in ThirdParty and View files 
+    There could be a mix of styles in ThirdParty and View files
     could contain all sorts of indentation, alignments and scopes.
     @todo subject to change.
     -->
@@ -213,7 +225,7 @@
     -->
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="120"/>
+            <property name="lineLimit" value="250"/>
             <property name="absoluteLineLimit" value="0"/>
         </properties>
     </rule>
@@ -242,7 +254,7 @@
     Checks there are no blank lines before a function closing brace.
     -->
     <rule ref="CodeIgniter4.WhiteSpace.FunctionClosingBraceSpace"/>
-    <!-- 
+    <!--
     The keyword elseif SHOULD be used instead of else if so that all control
     keywords look like single words.
     -->
