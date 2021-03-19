@@ -74,7 +74,11 @@
     <!--
     Doc block comment format and spacing.
     -->
-    <rule ref="Generic.Commenting.DocComment"/>
+    <rule ref="Generic.Commenting.DocComment">
+        <!-- Allow single-line doc comments. See https://github.com/squizlabs/PHP_CodeSniffer/issues/258. -->
+        <exclude name="Generic.Commenting.DocComment.ContentAfterOpen" />
+        <exclude name="Generic.Commenting.DocComment.ContentBeforeClose" />
+    </rule>
     <!--
     Tab width is 4 spaces (for phpcs)
     -->
