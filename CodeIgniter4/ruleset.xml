@@ -337,7 +337,11 @@
     has a trailing comma.
     Checks arrays are declared as "[]" not "array()".
     -->
-    <rule ref="CodeIgniter4.Arrays.ArrayDeclaration"/>
+    <rule ref="CodeIgniter4.Arrays.ArrayDeclaration">
+        <!-- Workaround for https://github.com/codeigniter4/coding-standard/issues/41 -->
+        <exclude-pattern>system/Language/en/*</exclude-pattern>
+    </rule>
+
     <!--
     Checks statments on subsequent lines are aligned. (line up the "=").
     -->
