@@ -339,7 +339,7 @@
     -->
     <rule ref="CodeIgniter4.Arrays.ArrayDeclaration">
         <!-- Workaround for https://github.com/codeigniter4/coding-standard/issues/41 -->
-        <exclude-pattern>system/Language/en/*</exclude-pattern>
+        <exclude-pattern>system/Language/*</exclude-pattern>
     </rule>
 
     <!--
