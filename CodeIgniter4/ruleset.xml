@@ -309,6 +309,10 @@
     -->
     <rule ref="PSR2.Namespaces.UseDeclaration"/>
     <!--
+    Require use statements to be alphabetically sorted
+    -->
+    <rule ref="SlevomatCodingStandard.Namespaces.AlphabeticallySortedUses"/>
+    <!--
     Checks PHP keywords are lower case.
     -->
     <rule ref="Generic.PHP.LowerCaseKeyword"/>
