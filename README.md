@@ -1,3 +1,10 @@
+## Deprecated
+
+The new [CodeIgniter Coding Standard](https://github.com/CodeIgniter/coding-standard) is officially published!
+This switch uses PHP CS Fixer instead of Code Sniffer and applies a lot of changes (most notably, PSR-12 compliance).
+Visit the repo for more information. This library will remain in place but may not be maintained and is no longer
+considered compliant with official CodeIgniter 4 framework styles.
+
 # CodeIgniter4-Standard
 
 [CodeIgniter](https://codeigniter.com) 4 coding standard for use with [PHP_CodeSniffer 3](https://github.com/squizlabs/PHP_CodeSniffer).
