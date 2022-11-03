@@ -3,6 +3,7 @@
 	"type": "phpcodesniffer-standard",
 	"description": "CodeIgniter 4 Standard for PHP_CodeSniffer 3.",
 	"license":"MIT",
+	"abandoned": "codeigniter/coding-standard",
 	"authors": [
         {
             "name": "Louis Linehan",
